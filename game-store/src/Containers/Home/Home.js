@@ -6,11 +6,13 @@ import { ReactComponent as Availability } from "../../Resources/image/available.
 import { ReactComponent as Reviews } from "../../Resources/image/reviews.svg";
 import { ReactComponent as Browse } from "../../Resources/image/browse.svg";
 import { hover } from "@testing-library/user-event/dist/hover";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Navigate, useNavigate } from "react-router-dom";
+import AnimatedPage from "../AnimatedPage/AnimatedPage";
 
 const Home = () => {
   const [browsing, setBrowsing] = useState(false);
+  const [landingPage, setLandingPage] = useState(true);
   const [hoverState, setHoverState] = useState([
     {
       hovered: false,
@@ -41,10 +43,12 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleHover = (e) => {
-    let newHoverState = hoverState[e.target.id];
-    newHoverState.hovered = !newHoverState.hovered;
-
-    setHoverState([...hoverState, (hoverState[e.target.id] = newHoverState)]);
+    const targetId = parseInt(e.target.id, 10); // Convert id to integer
+    if (!isNaN(targetId) && targetId >= 0 && targetId < hoverState.length) {
+      const newHoverState = [...hoverState];
+      newHoverState[targetId].hovered = !newHoverState[targetId].hovered;
+      setHoverState(newHoverState);
+    }
   };
 
   const handleBrowse = () => {
@@ -58,13 +62,15 @@ const Home = () => {
   };
 
   const variants = {
-    hidden: { opacity: 1, x: -100 },
+    hidden: { opacity: 1, x: -150 },
     visible: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 150 },
   };
 
   const buttonVariants = {
-    hidden: { opacity: 0, x: 100 },
+    hidden: { opacity: 0, x: 150 },
     visible: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -150 },
   };
 
   return (
@@ -76,18 +82,14 @@ const Home = () => {
           browsing={browsing}
           handleBrowse={handleBrowse}
           handleHome={handleHome}
+          landingPage={landingPage}
         />
-
-        <motion.div
-          className={styles.home_content}
-          initial="hidden"
-          animate="visible"
-          variants={variants}
-          transition={{ x: { type: "spring" }, duration: 1 }}
-        >
-          <h1>Game Store</h1>
-          <h2>„Heaven for gaming deals“ — IGN</h2>
-        </motion.div>
+        <AnimatedPage>
+          <motion.div className={styles.home_content}>
+            <h1>Game Store</h1>
+            <h2>„Heaven for gaming deals“ — IGN</h2>
+          </motion.div>
+        </AnimatedPage>
       </div>
 
       <motion.div

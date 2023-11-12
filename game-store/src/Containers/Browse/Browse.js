@@ -1,8 +1,43 @@
 import styles from "./Browse.module.css";
-import React from "react";
+import React, { useState } from "react";
+import NavBar from "../../Components/NavBar/NavBar";
+import { useNavigate } from "react-router";
+import { AnimatePresence } from "framer-motion";
+import AnimatedPage from "../AnimatedPage/AnimatedPage";
 
-const Browse = () => {
-  return <div className={styles.Browse}></div>;
+const Browse = (props) => {
+  const { handleHover, hoverState } = props;
+
+  const navigate = useNavigate();
+  const [browsing, setBrowsing] = useState(true);
+  const [landingPage, setLandingPage] = useState(false);
+
+  const handleBrowse = () => {
+    navigate("/browse");
+  };
+
+  const handleHome = () => {
+    navigate("/");
+  };
+
+  return (
+    <div className={styles.Browse}>
+      <NavBar
+        handleHover={handleHover}
+        hoverState={hoverState}
+        handleBrowse={handleBrowse}
+        handleHome={handleHome}
+        browsing={browsing}
+        landingPage={landingPage}
+      />
+
+      <AnimatedPage>
+        <div className={styles.browseContent}>
+          <h1 style={{ color: "#fff" }}>Nekuv text</h1>
+        </div>
+      </AnimatedPage>
+    </div>
+  );
 };
 
 export default Browse;
