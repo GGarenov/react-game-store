@@ -7,9 +7,14 @@ import { ReactComponent as Reviews } from "../../Resources/image/reviews.svg";
 import { ReactComponent as Browse } from "../../Resources/image/browse.svg";
 import { hover } from "@testing-library/user-event/dist/hover";
 import { motion } from "framer-motion";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const [browsing, setBrowsing] = useState(false);
   const [hoverState, setHoverState] = useState([
+    {
+      hovered: false,
+    },
     {
       hovered: false,
     },
@@ -33,6 +38,8 @@ const Home = () => {
     },
   ]);
 
+  const navigate = useNavigate();
+
   const handleHover = (e) => {
     const targetId = parseInt(e.target.id, 10); // Convert id to integer
     if (!isNaN(targetId) && targetId >= 0 && targetId < hoverState.length) {
@@ -40,6 +47,11 @@ const Home = () => {
       newHoverState[targetId].hovered = !newHoverState[targetId].hovered;
       setHoverState(newHoverState);
     }
+  };
+
+  const handleBrowse = (e) => {
+    setBrowsing(true);
+    navigate("/browse");
   };
 
   const variants = {
@@ -55,7 +67,7 @@ const Home = () => {
   return (
     <div className={styles.main}>
       <div className={styles.home}>
-        <NavBar handleHover={handleHover} hoverState={hoverState} />
+        <NavBar handleHover={handleHover} hoverState={hoverState} browsing={browsing} handleBrowse={handleBrowse} />
 
         <motion.div
           className={styles.home_content}
@@ -108,7 +120,7 @@ const Home = () => {
         variants={variants}
         transition={{ x: { type: "spring" }, duration: 1 }}
       >
-        <button>
+        <button onClick={handleBrowse}>
           <Browse className={styles.browse} />
           Browse
         </button>
