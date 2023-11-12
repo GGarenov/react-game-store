@@ -99,7 +99,7 @@ const Home = () => {
         variants={buttonVariants}
         transition={{ x: { type: "spring" }, duration: 1.5 }}
       >
-        <button id="4" onMouseEnter={handleHover} onMouseLeave={handleHover}>
+        <button id="4" className={styles.parent} onMouseEnter={handleHover} onMouseLeave={handleHover}>
           <Credibility className={styles.svg} style={{ fill: hoverState[4].hovered ? "#000000" : "#cccccc" }} />
           <div>
             <h3 style={{ color: hoverState[4].hovered ? "#000000" : "#cccccc" }}>Credible Shop</h3>
@@ -107,7 +107,7 @@ const Home = () => {
           </div>
         </button>
 
-        <button id="5" onMouseEnter={handleHover} onMouseLeave={handleHover}>
+        <button id="5" className={styles.parent} onMouseEnter={handleHover} onMouseLeave={handleHover}>
           <Availability className={styles.svg} style={{ fill: hoverState[5].hovered ? "#000000" : "#cccccc" }} />
           <div>
             <h3 style={{ color: hoverState[5].hovered ? "#000000" : "#cccccc" }}>High Availability</h3>
@@ -115,7 +115,7 @@ const Home = () => {
           </div>
         </button>
 
-        <button id="6" onMouseEnter={handleHover} onMouseLeave={handleHover}>
+        <button id="6" className={styles.parent} onMouseEnter={handleHover} onMouseLeave={handleHover}>
           <Reviews className={styles.svg} style={{ fill: hoverState[6].hovered ? "#000000" : "#cccccc" }} />
           <div>
             <h3 style={{ color: hoverState[6].hovered ? "#000000" : "#cccccc" }}>Great Reviews</h3>
