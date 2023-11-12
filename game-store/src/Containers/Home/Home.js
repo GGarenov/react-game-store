@@ -41,17 +41,20 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleHover = (e) => {
-    const targetId = parseInt(e.target.id, 10); // Convert id to integer
-    if (!isNaN(targetId) && targetId >= 0 && targetId < hoverState.length) {
-      const newHoverState = [...hoverState];
-      newHoverState[targetId].hovered = !newHoverState[targetId].hovered;
-      setHoverState(newHoverState);
-    }
+    let newHoverState = hoverState[e.target.id];
+    newHoverState.hovered = !newHoverState.hovered;
+
+    setHoverState([...hoverState, (hoverState[e.target.id] = newHoverState)]);
   };
 
-  const handleBrowse = (e) => {
+  const handleBrowse = () => {
     setBrowsing(true);
     navigate("/browse");
+  };
+
+  const handleHome = () => {
+    setBrowsing(false);
+    navigate("/");
   };
 
   const variants = {
@@ -67,7 +70,13 @@ const Home = () => {
   return (
     <div className={styles.main}>
       <div className={styles.home}>
-        <NavBar handleHover={handleHover} hoverState={hoverState} browsing={browsing} handleBrowse={handleBrowse} />
+        <NavBar
+          handleHover={handleHover}
+          hoverState={hoverState}
+          browsing={browsing}
+          handleBrowse={handleBrowse}
+          handleHome={handleHome}
+        />
 
         <motion.div
           className={styles.home_content}

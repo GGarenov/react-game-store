@@ -6,10 +6,10 @@ import { ReactComponent as Cart } from "../../Resources/image/cart.svg";
 import { ReactComponent as GitHub } from "../../Resources/image/github.svg";
 import { ReactComponent as Search } from "../../Resources/image/search.svg";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = (props) => {
-  const { browsing, handleHover, hoverState, handleBrowse } = props;
+  const { browsing, handleHover, hoverState, handleBrowse, handleHome } = props;
 
   const variants = {
     hidden: { opacity: 1, y: 15 },
@@ -31,7 +31,13 @@ const NavBar = (props) => {
         transition={{ y: { type: "spring" }, duration: 1 }}
       >
         <div className={styles.navbar_left}>
-          <div className={styles.logodiv} id="0" onMouseEnter={handleHover} onMouseLeave={handleHover}>
+          <div
+            className={styles.logodiv}
+            id="0"
+            onMouseEnter={handleHover}
+            onMouseLeave={handleHover}
+            onClick={handleHome}
+          >
             <Logo className={styles.svg} style={{ fill: hoverState[0].hovered ? "#fff" : "#cccccc" }} />
             <h3 style={{ color: hoverState[0].hovered ? "#fff" : "#cccccc" }}>Game Store</h3>
           </div>
