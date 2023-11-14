@@ -110,7 +110,7 @@ function App() {
   const location = useLocation();
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait" initial={false}>
       <Routes key={location.pathname} location={location}>
         <Route path="/" element={<Home handleHover={handleHover} hoverState={hoverState} shownGames={shownGames} />} />
         <Route
@@ -122,6 +122,7 @@ function App() {
               hoverState={hoverState}
               currentFilter={currentFilter}
               shownGames={shownGames}
+              setShownGames={setShownGames}
             />
           }
         />

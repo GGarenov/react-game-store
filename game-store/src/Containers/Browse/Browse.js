@@ -8,9 +8,10 @@ import { ReactComponent as Grids } from "../../Resources/image/grid.svg";
 import { ReactComponent as Columns } from "../../Resources/image/columns.svg";
 import Filters from "../../Components/Filters/Filters";
 import Grid from "../../Components/Grid/Grid";
+import games from "../../utils/games";
 
 const Browse = (props) => {
-  const { handleHover, handleSelect, hoverState, currentFilter, shownGames } = props;
+  const { handleHover, handleSelect, hoverState, currentFilter, shownGames, setShownGames } = props;
 
   const navigate = useNavigate();
   const [browsing, setBrowsing] = useState(true);
@@ -33,8 +34,22 @@ const Browse = (props) => {
     }
   };
 
+  useEffect(() => {
+    if (currentFilter === "none" || currentFilter == undefined) {
+      setShownGames(games);
+    } else if (currentFilter != "Wishlist" && currentFilter != "Ratings" && currentFilter != "Reviews") {
+      let filteredShownGames = games.filter((game) => game.genre === currentFilter);
+      setShownGames(filteredShownGames);
+    } else if (currentFilter === "Ratings") {
+      let filteredShownGames = games.sort(function (a, b) {
+        return b.rating - a.rating;
+      });
+      setShownGames(filteredShownGames);
+    }
+  }, [currentFilter]);
+
   return (
-    <div className={styles.Browse}>
+    <section className={styles.Browse}>
       <NavBar
         handleHover={handleHover}
         hoverState={hoverState}
@@ -58,9 +73,12 @@ const Browse = (props) => {
             <p>Based on player counts and ratings</p>
 
             <div className={styles.applied}>
-              <button className={styles.filterButton}>
-                Filter by: <span>{currentFilter}</span>
-              </button>
+              <div className={styles.filterList}>
+                <button className={styles.filterButton}>
+                  Filter by: <span>{currentFilter}</span>
+                </button>
+                <button className={`${styles.filterButton} ${styles.clearButton}`}>Clear Filter</button>
+              </div>
 
               <div className={styles.displayStyle}>
                 <p>Display options:</p>
@@ -88,7 +106,7 @@ const Browse = (props) => {
           </div>
         </div>
       </AnimatedPage>
-    </div>
+    </section>
   );
 };
 

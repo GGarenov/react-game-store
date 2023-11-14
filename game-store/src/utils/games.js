@@ -12,6 +12,8 @@ const games = [
     publishers: "CD PROJECT RED",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 78,
   },
   {
     name: "Battlefield V",
@@ -26,6 +28,8 @@ const games = [
     publishers: "Electronic Arts",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 71,
   },
   {
     name: "Life is Strange",
@@ -40,6 +44,8 @@ const games = [
     publishers: "Square Enix",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 83,
   },
   {
     name: "Mario Kart 8: Deluxe",
@@ -54,6 +60,8 @@ const games = [
     publishers: "Nintendo",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 84,
   },
   {
     name: "Bioshock Infinite",
@@ -68,6 +76,8 @@ const games = [
     publishers: "2K Games",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 86,
   },
   {
     name: "Anno: 1800",
@@ -82,6 +92,8 @@ const games = [
     publishers: "Ubisoft",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 81,
   },
   {
     name: "Red Dead Redemption 2",
@@ -96,6 +108,8 @@ const games = [
     publishers: "Rockstar Games",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 92,
   },
   {
     name: "Horizon Zero Dawn",
@@ -110,6 +124,8 @@ const games = [
     publishers: "Sony Interactive Entertainment",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 90,
   },
   {
     name: "Grand Theft Auto: V",
@@ -124,6 +140,8 @@ const games = [
     publishers: "Rockstar Games",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 90,
   },
   {
     name: "Warframe",
@@ -138,6 +156,8 @@ const games = [
     publishers: "Digital Extremes",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 76,
   },
   {
     name: "Minecraft",
@@ -152,6 +172,8 @@ const games = [
     publishers: "Mojang / Xbox Game Studios / Sony Interactive Entertainment",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 84,
   },
   {
     name: "Rise of the Tomb Raider",
@@ -166,6 +188,8 @@ const games = [
     publishers: "Microsoft Studios / Square Enix Europe",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 82,
   },
   {
     name: "Metro 2033",
@@ -180,6 +204,8 @@ const games = [
     publishers: "THQ / Deep Silver",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 82,
   },
   {
     name: "Terraria",
@@ -194,6 +220,8 @@ const games = [
     publishers: "505 Games",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 81,
   },
   {
     name: "Rocket League",
@@ -208,6 +236,8 @@ const games = [
     publishers: "Psyonix",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 83,
   },
   {
     name: "The Witcher 3: Wild Hunt",
@@ -222,6 +252,8 @@ const games = [
     publishers: "CD PROJECT",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 95,
   },
   {
     name: "Hitman",
@@ -236,6 +268,8 @@ const games = [
     publishers: "Square Enix Europe",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 81,
   },
   {
     name: "Fallout 4",
@@ -250,6 +284,8 @@ const games = [
     publishers: "Bethesda Softworks",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 80,
   },
   {
     name: "GTA: San Andreas",
@@ -264,6 +300,8 @@ const games = [
     publishers: "Rockstar Games",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 90,
   },
   {
     name: "Golf with your Friends",
@@ -278,6 +316,8 @@ const games = [
     publishers: "Team17 Digital / Blacklight Interactive",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 70,
   },
   {
     name: "Heavy Rain",
@@ -292,6 +332,8 @@ const games = [
     publishers: "Sony Computer Entertainment / Quantic Dream",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 82,
   },
   {
     name: "Dota 2",
@@ -306,6 +348,8 @@ const games = [
     publishers: "Valve",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 79,
   },
   {
     name: "Portal 2",
@@ -320,6 +364,8 @@ const games = [
     publishers: "Valve",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 92,
   },
   {
     name: "Sid Meier's Civilization VI",
@@ -334,6 +380,8 @@ const games = [
     publishers: "2K Games / Aspyr Media",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 82,
   },
   {
     name: "God of War",
@@ -348,6 +396,8 @@ const games = [
     publishers: "Sony Interactive Entertainment",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 94,
   },
   {
     name: "FIFA 22",
@@ -362,6 +412,8 @@ const games = [
     publishers: "EA Sports",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 80,
   },
   {
     name: "Half-Life 2",
@@ -376,6 +428,8 @@ const games = [
     publishers: "Valve",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 91,
   },
   {
     name: "The Walking Dead: S1",
@@ -390,6 +444,8 @@ const games = [
     publishers: "Telltale Games",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 86,
   },
   {
     name: "Crusader Kings III",
@@ -404,6 +460,8 @@ const games = [
     publishers: "Paradox Interactive",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 85,
   },
   {
     name: "Counter Strike: GO",
@@ -418,6 +476,8 @@ const games = [
     publishers: "Valve",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 82,
   },
   {
     name: "Detroit: Become Human",
@@ -432,6 +492,8 @@ const games = [
     publishers: "Sony Interactive Entertainment / Quantic Dream",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 89,
   },
   {
     name: "Tomb Raider",
@@ -446,6 +508,8 @@ const games = [
     publishers: "Square Enix Europe",
     inCart: false,
     selected: false,
+    isLiked: false,
+    rating: 85,
   },
 ];
 

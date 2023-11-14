@@ -9,7 +9,7 @@ const Card = (props) => {
       <img src={require(`../../Resources/image/gameFootage/${game.surname}.jpg`)} />
 
       <div className={styles.price}>
-        <div>Add to cart +</div>
+        <div>Add to cart</div>
         {game.price}
       </div>
       <h2 className={styles.name}>{game.name}</h2>
