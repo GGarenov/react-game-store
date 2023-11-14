@@ -21,14 +21,14 @@ const Filters = (props) => {
 
       <div className={styles.globalFilters}>
         <div
-          className={`${styles.filterDiv} ${styles.Wishlist}`}
+          className={styles.filterDiv}
           id="8"
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
           onClick={handleSelect}
         >
           <button
-            className={`${styles.filterBtn} ${styles.Wishlist}`}
+            className={styles.filterBtn}
             style={{ backgroundColor: hoverState[8].hovered || currentFilter == "Wishlist" ? "#fff" : "#2d2d2d" }}
           >
             <Wishlist
@@ -38,8 +38,9 @@ const Filters = (props) => {
           </button>
           Wishlist
         </div>
+
         <div
-          className={`${styles.filterDiv} ${styles.Ratings}`}
+          className={styles.filterDiv}
           id="9"
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
@@ -56,8 +57,9 @@ const Filters = (props) => {
           </button>
           Ratings
         </div>
+
         <div
-          className={`${styles.filterDiv} ${styles.Reviews}`}
+          className={styles.filterDiv}
           id="10"
           onMouseEnter={handleHover}
           onMouseLeave={handleHover}
@@ -76,8 +78,10 @@ const Filters = (props) => {
           Reviews
         </div>
       </div>
+
       <div className={styles.genreFilters}>
         <h2>Genres</h2>
+
         <div
           className={styles.filterDiv}
           id="11"
@@ -96,6 +100,7 @@ const Filters = (props) => {
           </button>
           Action
         </div>
+
         <div
           className={styles.filterDiv}
           id="12"
@@ -114,6 +119,7 @@ const Filters = (props) => {
           </button>
           Strategy
         </div>
+
         <div
           className={styles.filterDiv}
           id="13"
@@ -132,6 +138,7 @@ const Filters = (props) => {
           </button>
           RPG
         </div>
+
         <div
           className={styles.filterDiv}
           id="14"
@@ -150,6 +157,7 @@ const Filters = (props) => {
           </button>
           Shooter
         </div>
+
         <div
           className={styles.filterDiv}
           id="15"
@@ -168,6 +176,7 @@ const Filters = (props) => {
           </button>
           Adventure
         </div>
+
         <div
           className={styles.filterDiv}
           id="16"
@@ -186,6 +195,7 @@ const Filters = (props) => {
           </button>
           Puzzle
         </div>
+
         <div
           className={styles.filterDiv}
           id="17"
@@ -204,6 +214,7 @@ const Filters = (props) => {
           </button>
           Racing
         </div>
+
         <div
           className={styles.filterDiv}
           id="18"
@@ -226,4 +237,5 @@ const Filters = (props) => {
     </div>
   );
 };
+
 export default Filters;
