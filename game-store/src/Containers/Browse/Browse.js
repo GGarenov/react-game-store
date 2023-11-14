@@ -7,14 +7,13 @@ import AnimatedPage from "../AnimatedPage/AnimatedPage";
 import { ReactComponent as Grid } from "../../Resources/image/grid.svg";
 import { ReactComponent as Columns } from "../../Resources/image/columns.svg";
 import Filters from "../../Components/Filters/Filters";
-
 const Browse = (props) => {
-  const { handleHover, hoverState } = props;
+  const { handleHover, handleSelect, hoverState, currentFilter } = props;
 
   const navigate = useNavigate();
   const [browsing, setBrowsing] = useState(true);
   const [landingPage, setLandingPage] = useState(false);
-  const [currentFilter, setCurrentFilter] = useState("none");
+
   const [grid, setGrid] = useState(true);
 
   const handleBrowse = () => {
@@ -24,7 +23,6 @@ const Browse = (props) => {
   const handleHome = () => {
     navigate("/");
   };
-
   const handleLayoutSwitch = (e) => {
     if (e.target.id == "grid") {
       setGrid(true);
@@ -32,7 +30,6 @@ const Browse = (props) => {
       setGrid(false);
     }
   };
-
   return (
     <div className={styles.Browse}>
       <NavBar
@@ -46,12 +43,16 @@ const Browse = (props) => {
 
       <AnimatedPage>
         <div className={styles.browseContent}>
-          <Filters />
+          <Filters
+            hoverState={hoverState}
+            handleHover={handleHover}
+            handleSelect={handleSelect}
+            currentFilter={currentFilter}
+          />
 
           <div className={styles.list}>
             <h1>Trending and interesting</h1>
             <p>Based on player counts and ratings</p>
-
             <div className={styles.applied}>
               <button className={styles.filterButton}>
                 Order by: <span>{currentFilter}</span>
@@ -67,7 +68,6 @@ const Browse = (props) => {
                     id="grid"
                   />
                 </button>
-
                 <button className={styles.displayBtn}>
                   <Columns
                     className={styles.displayItem}
@@ -78,7 +78,6 @@ const Browse = (props) => {
                 </button>
               </div>
             </div>
-
             <div className={styles.grid}></div>
           </div>
         </div>
