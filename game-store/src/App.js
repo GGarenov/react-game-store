@@ -96,6 +96,10 @@ function App() {
     setCurrentFilter(filterNames[e.target.id - 8]);
   };
 
+  const clearFilter = () => {
+    setCurrentFilter("none");
+  };
+
   const handleHover = (e) => {
     if (hoverState[e.target.id].selected) {
       return;
@@ -123,6 +127,7 @@ function App() {
               currentFilter={currentFilter}
               shownGames={shownGames}
               setShownGames={setShownGames}
+              clearFilter={clearFilter}
             />
           }
         />

@@ -11,7 +11,7 @@ import Grid from "../../Components/Grid/Grid";
 import games from "../../utils/games";
 
 const Browse = (props) => {
-  const { handleHover, handleSelect, hoverState, currentFilter, shownGames, setShownGames } = props;
+  const { handleHover, handleSelect, hoverState, currentFilter, shownGames, setShownGames, clearFilter } = props;
 
   const navigate = useNavigate();
   const [browsing, setBrowsing] = useState(true);
@@ -35,13 +35,15 @@ const Browse = (props) => {
   };
 
   useEffect(() => {
-    if (currentFilter === "none" || currentFilter == undefined) {
+    if (currentFilter == "none") {
+      console.log(games + " in the none-if");
       setShownGames(games);
-    } else if (currentFilter != "Wishlist" && currentFilter != "Ratings" && currentFilter != "Reviews") {
+    } else if (currentFilter != "Ratings") {
       let filteredShownGames = games.filter((game) => game.genre === currentFilter);
       setShownGames(filteredShownGames);
     } else if (currentFilter === "Ratings") {
-      let filteredShownGames = games.sort(function (a, b) {
+      let filteredShownGames = games.slice(0);
+      filteredShownGames = filteredShownGames.sort(function (a, b) {
         return b.rating - a.rating;
       });
       setShownGames(filteredShownGames);
@@ -77,7 +79,9 @@ const Browse = (props) => {
                 <button className={styles.filterButton}>
                   Filter by: <span>{currentFilter}</span>
                 </button>
-                <button className={`${styles.filterButton} ${styles.clearButton}`}>Clear Filter</button>
+                <button className={`${styles.filterButton} ${styles.clearButton}`} onClick={clearFilter}>
+                  Clear Filter
+                </button>
               </div>
 
               <div className={styles.displayStyle}>
