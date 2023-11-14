@@ -2,17 +2,17 @@ import styles from "./Card.module.css";
 import React from "react";
 
 const Card = (props) => {
-  const { game } = props;
+  const { game, handleSelectGame, handleAddToCart, handleHover } = props;
 
   return (
     <div className={styles.card}>
-      <img src={require(`../../Resources/image/${game}.jpg`)} />
+      <img src={require(`../../Resources/image/gameFootage/${game.surname}.jpg`)} />
 
       <div className={styles.price}>
         <div>Add to cart +</div>
-        $69.99
+        {game.price}
       </div>
-      <h2 className={styles.name}>{game}</h2>
+      <h2 className={styles.name}>{game.name}</h2>
     </div>
   );
 };
