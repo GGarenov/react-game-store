@@ -13,6 +13,7 @@ import games from "../../utils/games";
 import AnimatedText from "../AnimatedPage/AnimatedText";
 import { ReactComponent as Add } from "../../Resources/image/add.svg";
 import AddedToCartBig from "../../Components/AddedToCart/AddedToCartBig";
+import Cart from "../../Components/Cart/Cart";
 
 const GamePage = (props) => {
   const {
@@ -38,6 +39,10 @@ const GamePage = (props) => {
     handleLike,
     textExtended,
     setTextExtended,
+    handleOpenCart,
+    handleCloseCart,
+    cartDisplayed,
+    clearCart,
   } = props;
 
   let { gameId } = useParams();
@@ -81,6 +86,19 @@ const GamePage = (props) => {
   return (
     <>
       <div className={styles.gamepage}>
+        {cartDisplayed ? (
+          <Cart
+            cartDisplayed={cartDisplayed}
+            handleOpenCart={handleOpenCart}
+            handleCloseCart={handleCloseCart}
+            cart={cart}
+            cartAmount={cartAmount}
+            handleHover={handleHover}
+            hoverState={hoverState}
+            clearCart={clearCart}
+          />
+        ) : null}
+
         <NavBar
           handleHover={handleHover}
           hoverState={hoverState}
@@ -92,6 +110,8 @@ const GamePage = (props) => {
           searching={searching}
           handleSearch={handleSearch}
           handleSearchSubmit={handleSearchSubmit}
+          handleOpenCart={handleOpenCart}
+          handleCloseCart={handleCloseCart}
         />
 
         <AnimatedGamePage>

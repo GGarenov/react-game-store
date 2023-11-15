@@ -15,8 +15,10 @@ function App() {
   const [allGames, setAllGames] = useState(games);
   const [cart, setCart] = useState([]);
   const [cartAmount, setCartAmount] = useState(0);
+  const [total, setTotal] = useState(0);
   const [shownGames, setShownGames] = useState(allGames);
   const [reviewDisplay, setReviewDisplay] = useState(false);
+  const [cartDisplayed, setCartDisplayed] = useState(false);
   const [search, setSearch] = useState("");
   const [searching, setSearching] = useState(false);
   const [browsing, setBrowsing] = useState(true);
@@ -120,12 +122,18 @@ function App() {
       hovered: false,
       selected: false,
     },
+    {
+      hovered: false,
+      selected: false,
+    },
   ]);
+
   const navigate = useNavigate();
 
   async function handleBrowse() {
     setExtended(false);
     setTextExtended(false);
+    setCartDisplayed(false);
     setHoverState([...hoverState, (hoverState[21].hovered = false)]);
     navigate("/browse");
   }
@@ -133,18 +141,20 @@ function App() {
   const handleHome = () => {
     setExtended(false);
     setTextExtended(false);
+    setCartDisplayed(false);
     setHoverState([...hoverState, (hoverState[21].hovered = false)]);
     navigate("/");
   };
 
+  useEffect(() => {}, [cart]);
+
   const handleSearch = (e) => {
     setSearch(e.target.value);
     setSearching(false);
-
-    console.log(location.pathname);
   };
 
   const handleSearchSubmit = (e) => {
+    setCurrentFilter("none");
     e.preventDefault();
     setSearching(true);
 
@@ -160,9 +170,8 @@ function App() {
   const handleSelectGame = (e) => {
     if (e.target.tagName === "BUTTON") {
       return;
-    } else {
+    } else if (e.target.classList[0] != "AddToCart_addToCart__zbJPe") {
       setSelectedGame(games[e.target.parentNode.id]);
-
       navigate(`/${games[e.target.parentNode.id].surname}`);
     }
   };
@@ -182,6 +191,7 @@ function App() {
 
   const clearFilter = () => {
     setCurrentFilter("none");
+    setSearch("");
     setReviewDisplay(false);
   };
 
@@ -239,8 +249,21 @@ function App() {
     setAllGames(handledAddedGame);
   };
 
-  const location = useLocation();
+  const clearCart = () => {
+    setCart([]);
+    setCartAmount(0);
+    const defaultGames = allGames.map((game, i) => {
+      game.inCart = false;
+      game.isHovered = false;
+      return game;
+    });
+    setAllGames(defaultGames);
+    let newHoverState = hoverState[21];
+    newHoverState.hovered = false;
+    setHoverState([...hoverState, (hoverState[21] = newHoverState)]);
+  };
 
+  const location = useLocation();
   useEffect(() => {
     if (location.pathname === "/") {
       setBrowsing(false);
@@ -255,6 +278,22 @@ function App() {
     }
   }, [location.pathname]);
 
+  const handleOpenCart = () => {
+    setCartDisplayed(true);
+  };
+
+  const handleCloseCart = () => {
+    setCartDisplayed(false);
+  };
+
+  useEffect(() => {
+    if (cartDisplayed) {
+      document.body.style.overflow = "hidden !important";
+    } else {
+      document.body.style.overflow = "scroll !important";
+    }
+  }, [cartDisplayed]);
+
   return (
     <AnimatePresence mode="wait" initial={false}>
       <Routes key={location.pathname} location={location}>
@@ -267,6 +306,10 @@ function App() {
               shownGames={shownGames}
               cart={cart}
               cartAmount={cartAmount}
+              cartDisplayed={cartDisplayed}
+              handleOpenCart={handleOpenCart}
+              handleCloseCart={handleCloseCart}
+              clearCart={clearCart}
             />
           }
         />
@@ -298,6 +341,10 @@ function App() {
               browsing={browsing}
               handleBrowse={handleBrowse}
               handleHome={handleHome}
+              cartDisplayed={cartDisplayed}
+              handleOpenCart={handleOpenCart}
+              handleCloseCart={handleCloseCart}
+              clearCart={clearCart}
             />
           }
         />
@@ -327,6 +374,10 @@ function App() {
               setExtended={setExtended}
               textExtended={textExtended}
               setTextExtended={setTextExtended}
+              cartDisplayed={cartDisplayed}
+              handleOpenCart={handleOpenCart}
+              handleCloseCart={handleCloseCart}
+              clearCart={clearCart}
             />
           }
         />

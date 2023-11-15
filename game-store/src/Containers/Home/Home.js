@@ -9,9 +9,10 @@ import { hover } from "@testing-library/user-event/dist/hover";
 import { motion, AnimatePresence } from "framer-motion";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import AnimatedPage from "../AnimatedPage/AnimatedPage";
+import Cart from "../../Components/Cart/Cart";
 
 const Home = (props) => {
-  const { shownGames, cartAmount, cart } = props;
+  const { shownGames, cartAmount, cart, cartDisplayed, handleOpenCart, handleCloseCart, clearCart } = props;
 
   const [browsing, setBrowsing] = useState(false);
   const [landingPage, setLandingPage] = useState(true);
@@ -75,6 +76,18 @@ const Home = (props) => {
 
   return (
     <div className={styles.main}>
+      {cartDisplayed ? (
+        <Cart
+          cartDisplayed={cartDisplayed}
+          handleOpenCart={handleOpenCart}
+          handleCloseCart={handleCloseCart}
+          cart={cart}
+          cartAmount={cartAmount}
+          handleHover={handleHover}
+          hoverState={hoverState}
+          clearCart={clearCart}
+        />
+      ) : null}
       <div className={styles.home}>
         <NavBar
           handleHover={handleHover}
@@ -84,6 +97,8 @@ const Home = (props) => {
           handleHome={handleHome}
           landingPage={landingPage}
           cartAmount={cartAmount}
+          handleOpenCart={handleOpenCart}
+          handleCloseCart={handleCloseCart}
         />
         <AnimatedPage>
           <motion.div className={styles.home_content}>

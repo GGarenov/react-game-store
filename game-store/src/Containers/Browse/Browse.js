@@ -9,6 +9,7 @@ import { ReactComponent as Columns } from "../../Resources/image/columns.svg";
 import Filters from "../../Components/Filters/Filters";
 import Grid from "../../Components/Grid/Grid";
 import games from "../../utils/games";
+import Cart from "../../Components/Cart/Cart";
 
 const Browse = (props) => {
   const {
@@ -36,10 +37,13 @@ const Browse = (props) => {
     browsing,
     handleBrowse,
     handleHome,
+    handleOpenCart,
+    handleCloseCart,
+    cartDisplayed,
+    clearCart,
   } = props;
 
   const navigate = useNavigate();
-
   const [landingPage, setLandingPage] = useState(false);
   const [grid, setGrid] = useState(true);
 
@@ -75,8 +79,29 @@ const Browse = (props) => {
     }
   }, [currentFilter]);
 
+  useEffect(() => {
+    if (cartDisplayed) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "scroll";
+    }
+  }, [cartDisplayed]);
+
   return (
-    <section className={styles.Browse}>
+    <section className={styles.Browse} style={{ maxHeight: cartDisplayed ? "100vh" : "1000vh", minHeight: "100vh" }}>
+      {cartDisplayed ? (
+        <Cart
+          cartDisplayed={cartDisplayed}
+          handleOpenCart={handleOpenCart}
+          handleCloseCart={handleCloseCart}
+          cart={cart}
+          cartAmount={cartAmount}
+          handleHover={handleHover}
+          hoverState={hoverState}
+          clearCart={clearCart}
+        />
+      ) : null}
+
       <NavBar
         handleHover={handleHover}
         hoverState={hoverState}
@@ -89,6 +114,7 @@ const Browse = (props) => {
         searching={searching}
         handleSearch={handleSearch}
         handleSearchSubmit={handleSearchSubmit}
+        handleOpenCart={handleOpenCart}
       />
 
       <AnimatedPage exitBeforeEnter>
@@ -136,6 +162,7 @@ const Browse = (props) => {
               search={search}
               searching={searching}
               handleSelectGame={handleSelectGame}
+              cartDisplayed={cartDisplayed}
             />
           </div>
         </div>
