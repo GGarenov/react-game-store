@@ -21,7 +21,8 @@ function App() {
   const [searching, setSearching] = useState(false);
   const [browsing, setBrowsing] = useState(true);
   const [selectedGame, setSelectedGame] = useState({});
-  const [extended, setExtended] = useState(true);
+  const [extended, setExtended] = useState(false);
+  const [textExtended, setTextExtended] = useState(false);
   const [hoverState, setHoverState] = useState([
     {
       hovered: false,
@@ -124,12 +125,14 @@ function App() {
 
   async function handleBrowse() {
     setExtended(false);
+    setTextExtended(false);
     setHoverState([...hoverState, (hoverState[21].hovered = false)]);
     navigate("/browse");
   }
 
   const handleHome = () => {
     setExtended(false);
+    setTextExtended(false);
     setHoverState([...hoverState, (hoverState[21].hovered = false)]);
     navigate("/");
   };
@@ -322,6 +325,8 @@ function App() {
               allGames={allGames}
               extended={extended}
               setExtended={setExtended}
+              textExtended={textExtended}
+              setTextExtended={setTextExtended}
             />
           }
         />
