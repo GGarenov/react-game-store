@@ -104,9 +104,13 @@ function App() {
   };
 
   const handleSelectGame = (e) => {
-    setSelectedGame(games[e.target.id]);
+    if (e.target.tagName === "BUTTON") {
+      return;
+    } else {
+      setSelectedGame(games[e.target.parentNode.id]);
 
-    navigate(`/${games[e.target.id].surname}`);
+      navigate(`/${games[e.target.parentNode.id].surname}`);
+    }
   };
 
   const handleLike = (e) => {
@@ -209,8 +213,20 @@ function App() {
             />
           }
         />
-        <Route path="/:gameId" element={<GamePage />} />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="/:gameId"
+          element={
+            <GamePage
+              cart={cart}
+              cartAmount={cartAmount}
+              handleHover={handleHover}
+              hoverState={hoverState}
+              handleLike={handleLike}
+              handleAddToCart={handleAddToCart}
+              handleSelectGame={handleSelectGame}
+            />
+          }
+        />
       </Routes>
     </AnimatePresence>
   );
