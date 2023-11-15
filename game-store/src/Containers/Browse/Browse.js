@@ -11,7 +11,20 @@ import Grid from "../../Components/Grid/Grid";
 import games from "../../utils/games";
 
 const Browse = (props) => {
-  const { handleHover, handleSelect, hoverState, currentFilter, shownGames, setShownGames, clearFilter } = props;
+  const {
+    handleHover,
+    handleSelect,
+    hoverState,
+    currentFilter,
+    shownGames,
+    setShownGames,
+    clearFilter,
+    setReviewDisplay,
+    reviewDisplay,
+    allGames,
+    setAllGames,
+    handleLike,
+  } = props;
 
   const navigate = useNavigate();
   const [browsing, setBrowsing] = useState(true);
@@ -36,17 +49,22 @@ const Browse = (props) => {
 
   useEffect(() => {
     if (currentFilter == "none") {
-      console.log(games + " in the none-if");
-      setShownGames(games);
-    } else if (currentFilter != "Ratings") {
-      let filteredShownGames = games.filter((game) => game.genre === currentFilter);
+      setShownGames(allGames);
+    } else if (currentFilter != "Ratings" && currentFilter != "Reviews" && currentFilter != "Wishlist") {
+      let filteredShownGames = allGames.filter((game) => game.genre === currentFilter);
       setShownGames(filteredShownGames);
     } else if (currentFilter === "Ratings") {
-      let filteredShownGames = games.slice(0);
+      let filteredShownGames = allGames.slice(0);
       filteredShownGames = filteredShownGames.sort(function (a, b) {
         return b.rating - a.rating;
       });
       setShownGames(filteredShownGames);
+    } else if (currentFilter === "Reviews") {
+      setReviewDisplay(true);
+    }
+
+    if (currentFilter != "Reviews") {
+      setReviewDisplay(false);
     }
   }, [currentFilter]);
 
@@ -106,7 +124,7 @@ const Browse = (props) => {
               </div>
             </div>
 
-            <Grid shownGames={shownGames} />
+            <Grid shownGames={shownGames} reviewDisplay={reviewDisplay} handleLike={handleLike} />
           </div>
         </div>
       </AnimatedPage>
