@@ -42,7 +42,7 @@ const Card = (props) => {
       animate="animate"
       exit="exit"
     >
-      <img src={game.cover} className={styles.img} />
+      <img src={game.cover} className={styles.img} alt="Game Cover Image" />
 
       <div className={styles.price}>
         {game.inCart ? (
@@ -53,7 +53,7 @@ const Card = (props) => {
         ${game.price}
       </div>
       <h2 className={styles.name}>{game.name}</h2>
-      <button className={styles.like} id={game.id} onClick={handleLike}>
+      <button className={styles.like} id={game.id} onClick={handleLike} aria-label="Like">
         <Like style={{ fill: game.isLiked ? "#F53333" : "#cccccc" }} className={styles.likeSVG} />
       </button>
     </motion.div>

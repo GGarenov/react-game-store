@@ -25,6 +25,7 @@ const NotFound = (props) => {
     handleSearch,
     handleSearchSubmit,
     handleRemoveFromCart,
+    openGamePage,
   } = props;
   const location = useLocation();
 
@@ -60,6 +61,7 @@ const NotFound = (props) => {
           hoverState={hoverState}
           clearCart={clearCart}
           handleRemoveFromCart={handleRemoveFromCart}
+          openGamePage={openGamePage}
         />
       ) : null}
 
@@ -80,7 +82,7 @@ const NotFound = (props) => {
 
       <motion.div className={styles.container} variants={animations} initial="initial" animate="animate" exit="exit">
         <div className={styles.notFoundContent}>
-          <img className={styles.notFoundImg} src={require("../../Resources/image/404.png")} />
+          <img className={styles.notFoundImg} src={require("../../Resources/image/404.png")} alt="Not Found Warning" />
           <div className={styles.notFoundText}>
             <h2>
               <span>{location.pathname}</span> is not available!

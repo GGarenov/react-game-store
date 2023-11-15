@@ -17,7 +17,7 @@ const Cart = (props) => {
     hoverState,
     clearCart,
     handleRemoveFromCart,
-    handleOpenGamePage,
+    openGamePage,
   } = props;
 
   const [total, setTotal] = useState(0);
@@ -54,15 +54,23 @@ const Cart = (props) => {
                 return (
                   <motion.div
                     className={styles.item}
+                    key={i}
                     variants={variants}
                     initial="initial"
                     animate="animate"
                     exit="exit"
                   >
-                    <h3>{item.name}</h3>
+                    <h3 id={item.surname} onClick={openGamePage}>
+                      {item.name}
+                    </h3>
                     <div>
                       ${item.price}
-                      <button id={item.id} onClick={handleRemoveFromCart} className={styles.removeButton}>
+                      <button
+                        id={item.id}
+                        onClick={handleRemoveFromCart}
+                        className={styles.removeButton}
+                        aria-label="Close"
+                      >
                         <Cross className={styles.cross} />
                       </button>
                     </div>
@@ -88,6 +96,7 @@ const Cart = (props) => {
               onMouseEnter={handleHover}
               onMouseLeave={handleHover}
               style={{ color: hoverState[24].hovered ? "#92f" : "#fff" }}
+              aria-label="Checkout"
             >
               Checkout
               <Right className={styles.right} style={{ fill: hoverState[24].hovered ? "#92f" : "#fff" }} />

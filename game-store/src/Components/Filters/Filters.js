@@ -30,6 +30,7 @@ const Filters = (props) => {
           <button
             className={styles.filterBtn}
             style={{ backgroundColor: hoverState[8].hovered || currentFilter == "Wishlist" ? "#fff" : "#2d2d2d" }}
+            aria-label="Open wishlist"
           >
             <Wishlist
               style={{ fill: hoverState[8].hovered || currentFilter == "Wishlist" ? "#000000" : "#fff" }}
@@ -49,6 +50,7 @@ const Filters = (props) => {
           <button
             className={`${styles.filterBtn2} ${styles.Ratings}`}
             style={{ backgroundColor: hoverState[9].hovered || currentFilter == "Ratings" ? "#fff" : "#2d2d2d" }}
+            aria-label="Sort after ratings"
           >
             <Ratings
               className={`${styles.filterSVG2} ${styles.Ratings}`}
@@ -68,6 +70,7 @@ const Filters = (props) => {
           <button
             className={`${styles.filterBtn3} ${styles.Reviews}`}
             style={{ backgroundColor: hoverState[10].hovered || currentFilter == "Reviews" ? "#fff" : "#2d2d2d" }}
+            aria-label="Sort after reviews"
           >
             <Reviews
               className={`${styles.filterSVG3} ${styles.Reviews}`}
@@ -92,6 +95,7 @@ const Filters = (props) => {
           <button
             className={styles.filterBtn3}
             style={{ backgroundColor: hoverState[11].hovered || currentFilter == "Action" ? "#fff" : "#2d2d2d" }}
+            aria-label="Show action genre"
           >
             <Action
               className={styles.filterSVG3}
@@ -111,6 +115,7 @@ const Filters = (props) => {
           <button
             className={styles.filterBtn2}
             style={{ backgroundColor: hoverState[12].hovered || currentFilter == "Strategy" ? "#fff" : "#2d2d2d" }}
+            aria-label="Show Strategy genre"
           >
             <Strategy
               className={styles.filterSVG2}
@@ -130,6 +135,7 @@ const Filters = (props) => {
           <button
             className={styles.filterBtn3}
             style={{ backgroundColor: hoverState[13].hovered || currentFilter == "RPG" ? "#fff" : "#2d2d2d" }}
+            aria-label="Show RPG genre"
           >
             <RPG
               className={styles.filterSVG3}
@@ -149,6 +155,7 @@ const Filters = (props) => {
           <button
             className={styles.filterBtn2}
             style={{ backgroundColor: hoverState[14].hovered || currentFilter == "Shooter" ? "#fff" : "#2d2d2d" }}
+            aria-label="Show Shooter genre"
           >
             <Shooter
               className={styles.filterSVG2}
@@ -168,6 +175,7 @@ const Filters = (props) => {
           <button
             className={styles.filterBtn2}
             style={{ backgroundColor: hoverState[15].hovered || currentFilter == "Adventure" ? "#fff" : "#2d2d2d" }}
+            aria-label="Show Adventure genre"
           >
             <Adventure
               className={styles.filterSVG2}
@@ -187,6 +195,7 @@ const Filters = (props) => {
           <button
             className={styles.filterBtn4}
             style={{ backgroundColor: hoverState[16].hovered || currentFilter == "Puzzle" ? "#fff" : "#2d2d2d" }}
+            aria-label="Show Puzzle genre"
           >
             <Puzzle
               className={styles.filterSVG2}
@@ -206,6 +215,7 @@ const Filters = (props) => {
           <button
             className={styles.filterBtn3}
             style={{ backgroundColor: hoverState[17].hovered || currentFilter == "Racing" ? "#fff" : "#2d2d2d" }}
+            aria-label="Show Racing genre"
           >
             <Racing
               className={styles.filterSVG3}
@@ -225,6 +235,7 @@ const Filters = (props) => {
           <button
             className={styles.filterBtn4}
             style={{ backgroundColor: hoverState[18].hovered || currentFilter == "Sports" ? "#fff" : "#2d2d2d" }}
+            aria-label="Show Sports genre"
           >
             <Sports
               className={styles.filterSVG3}

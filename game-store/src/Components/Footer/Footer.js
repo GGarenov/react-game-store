@@ -46,7 +46,11 @@ const Footer = (props) => {
           </p>
         </div>
         <div className={styles.infoRight}>
-          <img className={styles.google} src={require("../../Resources/image/googleplaybadge.png")} />
+          <img
+            className={styles.google}
+            src={require("../../Resources/image/googleplaybadge.png")}
+            alt="Google Play Badge"
+          />
           <AppStore className={styles.apple} />
         </div>
       </div>
@@ -61,8 +65,8 @@ const Footer = (props) => {
         </div>
 
         <div className={styles.endRight}>
-          <img className={styles.social} src={require("../../Resources/image/twitter.png")} />
-          <img className={styles.social} src={require("../../Resources/image/instagram.png")} />
+          <img className={styles.social} src={require("../../Resources/image/twitter.png")} alt="Twitter Logo" />
+          <img className={styles.social} src={require("../../Resources/image/instagram.png")} alt="Instagram Logo" />
         </div>
       </div>
     </div>

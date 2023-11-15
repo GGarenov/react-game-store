@@ -70,22 +70,6 @@ const Grid = (props) => {
                   />
                 );
               })
-          : cartDisplayed
-          ? shownGames.map((game, i) => {
-              if (i <= 7) {
-                return (
-                  <Card
-                    game={game}
-                    key={game.name}
-                    handleLike={handleLike}
-                    handleHoverGame={handleHoverGame}
-                    handleAddToCart={handleAddToCart}
-                    handleSelectGame={handleSelectGame}
-                    hoverState={hoverState}
-                  />
-                );
-              }
-            })
           : shownGames.map((game, i) => {
               if (game.name.toLowerCase().includes(search.toLowerCase())) {
                 return (

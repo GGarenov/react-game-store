@@ -43,6 +43,8 @@ const Browse = (props) => {
     cartDisplayed,
     clearCart,
     handleRemoveFromCart,
+    setHoverState,
+    openGamePage,
   } = props;
 
   const navigate = useNavigate();
@@ -89,6 +91,19 @@ const Browse = (props) => {
     }
   }, [cartDisplayed]);
 
+  useEffect(() => {
+    let unhoveredState = hoverState.map((element, i) => {
+      if (i >= 25) {
+        return;
+      } else {
+        element.hovered = false;
+        return element;
+      }
+    });
+
+    setHoverState(unhoveredState);
+  }, []);
+
   return (
     <section className={styles.Browse} style={{ maxHeight: cartDisplayed ? "100vh" : "1000vh", minHeight: "100vh" }}>
       {cartDisplayed ? (
@@ -102,6 +117,7 @@ const Browse = (props) => {
           hoverState={hoverState}
           clearCart={clearCart}
           handleRemoveFromCart={handleRemoveFromCart}
+          openGamePage={openGamePage}
         />
       ) : null}
 
@@ -135,21 +151,30 @@ const Browse = (props) => {
 
             <div className={styles.applied}>
               <div className={styles.filterList}>
-                <button className={styles.filterButton}>
+                <button className={styles.filterButton} aria-label="Current Filter">
                   Filter by: <span>{currentFilter}</span>
                 </button>
-                <button className={`${styles.filterButton} ${styles.clearButton}`} onClick={clearFilter}>
+                <button
+                  className={`${styles.filterButton} ${styles.clearButton}`}
+                  onClick={clearFilter}
+                  aria-label="Clear Filters"
+                >
                   Clear Filter
                 </button>
               </div>
 
               <div className={styles.displayStyle}>
                 <p>Display options:</p>
-                <button className={styles.displayBtn} onClick={handleLayoutSwitch} id="grid">
+                <button className={styles.displayBtn} onClick={handleLayoutSwitch} id="grid" aria-label="Display grids">
                   <Grids className={styles.displayItem} style={{ fill: grid ? "#e5e5e5" : "#6f6f6f" }} />
                 </button>
 
-                <button className={styles.displayBtn} onClick={handleLayoutSwitch} id="columns">
+                <button
+                  className={styles.displayBtn}
+                  onClick={handleLayoutSwitch}
+                  id="columns"
+                  aria-label="Display columns"
+                >
                   <Columns className={styles.displayItem} style={{ fill: grid ? "#6f6f6f" : "#e5e5e5" }} />
                 </button>
               </div>

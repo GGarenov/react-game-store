@@ -16,11 +16,11 @@ function App() {
   const [allGames, setAllGames] = useState(games);
   const [cart, setCart] = useState([]);
   const [cartAmount, setCartAmount] = useState(0);
-  const [total, setTotal] = useState(0);
   const [shownGames, setShownGames] = useState(allGames);
   const [reviewDisplay, setReviewDisplay] = useState(false);
   const [cartDisplayed, setCartDisplayed] = useState(false);
   const [search, setSearch] = useState("");
+  const [overlap, setOverlap] = useState(false);
   const [searching, setSearching] = useState(false);
   const [browsing, setBrowsing] = useState(true);
   const [selectedGame, setSelectedGame] = useState(false);
@@ -207,15 +207,27 @@ function App() {
     setReviewDisplay(false);
   };
 
+  const openGamePage = (e) => {
+    setCartDisplayed(false);
+    let selectedGameSurname = e.target.id;
+    navigate(`/games/${selectedGameSurname}`);
+  };
+
   const handleHover = (e) => {
     if (hoverState[e.target.id].selected) {
       return;
     }
 
-    let newHoverState = hoverState[e.target.id];
-    newHoverState.hovered = !newHoverState.hovered;
+    let newHoverState = hoverState.map((element, i) => {
+      if (e.target.id == i) {
+        element.hovered = !element.hovered;
+        return element;
+      } else {
+        return element;
+      }
+    });
 
-    setHoverState([...hoverState, (hoverState[e.target.id] = newHoverState)]);
+    setHoverState(newHoverState);
   };
 
   const handleHoverGame = (e) => {
@@ -275,28 +287,6 @@ function App() {
     setHoverState([...hoverState, (hoverState[21] = newHoverState)]);
   };
 
-  const handleNavGamePage = () => {
-    setExtended(false);
-    setTextExtended(false);
-    setCartDisplayed(false);
-    setHoverState([...hoverState, (hoverState[21].hovered = false)]);
-    navigate("/games/riseofthetombraider");
-  };
-
-  const handleNavNotFoundPage = () => {
-    navigate("/this-page");
-  };
-
-  const handleNavNotFoundQuery = () => {
-    navigate("/games/404");
-  };
-
-  const handlePlayDice = () => {
-    let randomIndex = Math.floor(Math.random() * 32);
-    let randomSurname = allGames[randomIndex].surname;
-    navigate(`games/${randomSurname}`);
-  };
-
   const handleRemoveFromCart = (e) => {
     let removedIndex = cart.findIndex((game) => game.id == e.target.id);
     let newAllGames = allGames.map((game, i) => {
@@ -318,6 +308,8 @@ function App() {
   };
 
   useEffect(() => {
+    setOverlap(false);
+
     if (location.pathname === "/") {
       setBrowsing(false);
     } else {
@@ -368,10 +360,10 @@ function App() {
               handleHoverGame={handleHoverGame}
               handleSelectGame={handleSelectGame}
               handleRemoveFromCart={handleRemoveFromCart}
-              handleNavGamePage={handleNavGamePage}
-              handleNavNotFoundPage={handleNavNotFoundPage}
-              handleNavNotFoundQuery={handleNavNotFoundQuery}
-              handlePlayDice={handlePlayDice}
+              setHoverState={setHoverState}
+              overlap={overlap}
+              setOverlap={setOverlap}
+              openGamePage={openGamePage}
             />
           }
         />
@@ -408,6 +400,8 @@ function App() {
               handleCloseCart={handleCloseCart}
               clearCart={clearCart}
               handleRemoveFromCart={handleRemoveFromCart}
+              setHoverState={setHoverState}
+              openGamePage={openGamePage}
             />
           }
         />
@@ -442,6 +436,7 @@ function App() {
               handleCloseCart={handleCloseCart}
               clearCart={clearCart}
               handleRemoveFromCart={handleRemoveFromCart}
+              openGamePage={openGamePage}
             />
           }
         />
@@ -465,6 +460,7 @@ function App() {
               handleSearchSubmit={handleSearchSubmit}
               handleBrowse={handleBrowse}
               handleRemoveFromCart={handleRemoveFromCart}
+              openGamePage={openGamePage}
             />
           }
         />

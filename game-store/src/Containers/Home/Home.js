@@ -11,10 +11,11 @@ import { ReactComponent as NotFoundQuery } from "../../Resources/image/notfoundq
 import { ReactComponent as Git } from "../../Resources/image/git.svg";
 import { ReactComponent as Performance } from "../../Resources/image/performance.svg";
 import { ReactComponent as Sources } from "../../Resources/image/sources.svg";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, m } from "framer-motion";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
-
 import Cart from "../../Components/Cart/Cart";
+import AnimatedScroll from "../AnimatedPage/AnimatedScroll";
+import games from "../../utils/games";
 
 const Home = (props) => {
   const {
@@ -26,116 +27,15 @@ const Home = (props) => {
     handleCloseCart,
     clearCart,
     handleRemoveFromCart,
-    handleNavGamePage,
-    handleNavNotFoundPage,
-    handleNavNotFoundQuery,
-    handlePlayDice,
+    hoverState,
+    setHoverState,
+    overlap,
+    setOverlap,
+    openGamePage,
   } = props;
 
   const [browsing, setBrowsing] = useState(false);
   const [landingPage, setLandingPage] = useState(true);
-  const [hoverState, setHoverState] = useState([
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-    {
-      hovered: false,
-      selected: false,
-    },
-  ]);
 
   const navigate = useNavigate();
 
@@ -147,13 +47,39 @@ const Home = (props) => {
   };
 
   const handleBrowse = () => {
-    setBrowsing(true);
-    navigate("/browse");
+    setOverlap(true);
+    setTimeout(() => {
+      setBrowsing(true);
+      navigate("/browse");
+    }, 1500);
   };
 
   const handleHome = () => {
     setBrowsing(false);
     navigate("/");
+  };
+
+  const handleNavGamePage = () => {
+    setHoverState([...hoverState, (hoverState[21].hovered = false)]);
+    navigate("/games/riseofthetombraider");
+  };
+
+  const handleNavNotFoundPage = () => {
+    navigate("/this-page");
+  };
+
+  const handleNavNotFoundQuery = () => {
+    navigate("/games/404");
+  };
+
+  const handlePlayDice = () => {
+    let randomIndex = Math.floor(Math.random() * 32);
+    let randomSurname = games[randomIndex].surname;
+    setOverlap(true);
+    setTimeout(() => {
+      setBrowsing(true);
+      navigate(`games/${randomSurname}`);
+    }, 1500);
   };
 
   const variants = {
@@ -163,13 +89,21 @@ const Home = (props) => {
   };
 
   const buttonVariants = {
-    hidden: { opacity: 0, x: 150 },
-    visible: { opacity: 1, x: 0 },
-    exit: { opacity: 0, x: -150 },
+    hidden: { opacity: 0, y: 900 },
+    visible: { opacity: 1, y: 0, transition: { y: { type: "tween", duration: 1.5, bounce: 0.3 } } },
   };
 
   return (
     <div className={styles.main}>
+      {overlap ? (
+        <motion.div
+          className={styles.overlap}
+          variants={buttonVariants}
+          initial="hidden"
+          animate="visible"
+        ></motion.div>
+      ) : null}
+
       {cartDisplayed ? (
         <Cart
           cartDisplayed={cartDisplayed}
@@ -181,6 +115,7 @@ const Home = (props) => {
           hoverState={hoverState}
           clearCart={clearCart}
           handleRemoveFromCart={handleRemoveFromCart}
+          openGamePage={openGamePage}
         />
       ) : null}
       <div className={styles.home}>
@@ -211,22 +146,22 @@ const Home = (props) => {
             </div>
 
             <div className={styles.buttons}>
-              <button className={`${styles.cta} ${styles.browseBtn}`} onClick={handleBrowse}>
+              <button className={`${styles.cta} ${styles.browseBtn}`} onClick={handleBrowse} aria-label="Browse">
                 <Enter className={styles.ctaSVG} />
                 Browse
               </button>
-              <button className={styles.cta} onClick={handlePlayDice}>
+              <button className={styles.cta} onClick={handlePlayDice} aria-label="Open random game page">
                 <Dice className={styles.ctaSVG} />
                 Play Dice
               </button>
               <a href="https://github.com/gianlucajahn/react-ecommerce-store" target="_blank">
-                <button className={styles.cta}>
+                <button className={styles.cta} aria-label="View Repository">
                   <GitHubLogo className={styles.ctaSVG} />
                   GitHub
                 </button>
               </a>
               <a href="https://www.linkedin.com/in/gianlucajahn/" target="_blank">
-                <button className={`${styles.cta} ${styles.lastChild}`}>
+                <button className={`${styles.cta} ${styles.lastChild}`} aria-label="Open LinkedIn">
                   <LinkedIn className={`${styles.ctaSVG} ${styles.linkedin}`} />
                   <span>LinkedIn</span>
                 </button>
@@ -237,38 +172,46 @@ const Home = (props) => {
           <div className={styles.right}>
             <div className={styles.buttonsRight}>
               <h2>Quick Navigation</h2>
-              <button className={styles.cta} onClick={handleNavGamePage}>
+              <button className={styles.cta} onClick={handleNavGamePage} aria-label="Open a game page">
                 <Game className={styles.ctaSVG} />
                 Game Page
               </button>
-              <button className={styles.cta} onClick={handleNavNotFoundPage}>
+              <button className={styles.cta} onClick={handleNavNotFoundPage} aria-label="Open 404 page">
                 <NotFound className={styles.ctaSVG} />
                 404 Page
               </button>
-              <button className={`${styles.cta} ${styles.lastChild}`} onClick={handleNavNotFoundQuery}>
+              <button
+                className={`${styles.cta} ${styles.lastChild}`}
+                onClick={handleNavNotFoundQuery}
+                aria-label="open 404 query page"
+              >
                 <NotFoundQuery className={`${styles.ctaSVG}`} />
                 404 Query
               </button>
               <a href="https://github.com/gianlucajahn/react-ecommerce-store/commits/main" target="_blank">
-                <button className={styles.cta}>
+                <button className={styles.cta} aria-label="Open commit log">
                   <Git className={styles.ctaSVG} />
                   Commit Log
                 </button>
               </a>
               <a href="" target="_blank">
-                <button className={`${styles.cta} ${styles.lastChild}`}>
+                <button className={`${styles.cta} ${styles.lastChild}`} aria-label="Open performance test results">
                   <Performance className={`${styles.ctaSVG}`} />
                   Performance
                 </button>
               </a>
               <a href="" target="_blank">
-                <button className={`${styles.cta} ${styles.lastChild}`}>
-                  <img className={styles.technologies} src={require("../../Resources/image/whatruns.png")} />
+                <button className={`${styles.cta} ${styles.lastChild}`} aria-label="View technologies used">
+                  <img
+                    className={styles.technologies}
+                    src={require("../../Resources/image/whatruns.png")}
+                    alt="WhatRuns logo"
+                  />
                   Technologies
                 </button>
               </a>
-              <a href="" target="_blank">
-                <button className={`${styles.cta} ${styles.lastChild}`}>
+              <a href="https://github.com/gianlucajahn/react-ecommerce-store#sources" target="_blank">
+                <button className={`${styles.cta} ${styles.lastChild}`} aria-label="View Sources">
                   <Sources className={`${styles.ctaSVG}`} />
                   Our Sources
                 </button>

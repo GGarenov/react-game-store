@@ -66,7 +66,7 @@ const NavBar = (props) => {
                   animate="visible"
                   initial={location.pathname === "/browse" ? "hidden" : "visible"}
                   variants={searchVariants}
-                  transition={{ opacity: { type: "spring" }, duration: 0.01, delay: 0.4 }}
+                  transition={{ opacity: { type: "spring" }, duration: 0.01, delay: 0.25 }}
                   className={styles.searchdiv}
                 >
                   <form onSubmit={handleSearchSubmit}>
@@ -79,16 +79,17 @@ const NavBar = (props) => {
                         onMouseEnter={handleHover}
                         onMouseLeave={handleHover}
                         id="7"
+                        aria-label="Search"
                       />
                     </button>
                   </form>
                 </motion.div>
               </>
             ) : (
-              <>
+              <div className={styles.browsediv}>
                 <Browse className={styles.svg} style={{ fill: "#fff" }} />
                 <h3 onClick={handleBrowse}>Browse Store</h3>
-              </>
+              </div>
             )}
           </div>
         </div>
