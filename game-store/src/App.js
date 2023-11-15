@@ -211,6 +211,12 @@ function App() {
     } else {
       setBrowsing(true);
     }
+
+    if (location.pathname != "/browse") {
+      document.body.style.overflow = "hidden";
+    } else if (location.pathname === "/browse") {
+      document.body.style.overflow = "scroll";
+    }
   }, [location.pathname]);
 
   return (
@@ -271,6 +277,7 @@ function App() {
               handleAddToCart={handleAddToCart}
               handleSelectGame={handleSelectGame}
               selectedGame={selectedGame}
+              setSelectedGame={setSelectedGame}
               handleSearch={handleSearch}
               handleSearchSubmit={handleSearchSubmit}
               search={search}
@@ -279,6 +286,7 @@ function App() {
               handleBrowse={handleBrowse}
               handleHome={handleHome}
               setHoverState={setHoverState}
+              allGames={allGames}
             />
           }
         />

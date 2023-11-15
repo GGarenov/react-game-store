@@ -1,10 +1,12 @@
 import styles from "./GamePage.module.css";
-import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import AnimatedGamePage from "../AnimatedPage/AnimatedGamePage";
 import NavBar from "../../Components/NavBar/NavBar";
 import { ReactComponent as Arrow } from "../../Resources/image/arrow.svg";
+import Slider from "../../Components/Slider/Slider";
+import games from "../../utils/games";
 
 const GamePage = (props) => {
   const {
@@ -21,10 +23,30 @@ const GamePage = (props) => {
     browsing,
     handleBrowse,
     selectedGame,
+    setSelectedGame,
     setHoverState,
+    allGames,
   } = props;
 
   let { gameId } = useParams();
+  const location = useLocation();
+  const [carouselState, setCarouselState] = useState(0);
+
+  const incrementCarousel = (e) => {
+    if (carouselState === 3) {
+      setCarouselState(0);
+    } else {
+      setCarouselState(carouselState + 1);
+    }
+  };
+
+  const decrementCarousel = (e) => {
+    if (carouselState === 0) {
+      setCarouselState(3);
+    } else {
+      setCarouselState(carouselState - 1);
+    }
+  };
 
   return (
     <>
@@ -60,9 +82,30 @@ const GamePage = (props) => {
               <h1>{selectedGame.name}</h1>
             </header>
 
-            <section>
-              <div className={styles.images}></div>
-              <div className={styles.gameInfo}></div>
+            <section className={styles.game}>
+              <Slider selectedGame={selectedGame} setSelectedGame={setSelectedGame} allGames={allGames} />
+              <div className={styles.gameInfo}>
+                <div className={styles.about}>
+                  <div className={styles.aboutTop}>
+                    <h2>About</h2>
+                    <p>{selectedGame.desc}</p>
+                  </div>
+                  <div className={styles.aboutBottom}>
+                    <a href={selectedGame.link} target="_blank">
+                      {selectedGame.name} Website
+                    </a>
+                    <h4>Released: {selectedGame.release}</h4>
+                    <h4>Platforms: {selectedGame.platforms}</h4>
+                    <h4>Main Genre: {selectedGame.genre}</h4>
+                    <h4>Developers: {selectedGame.developers}</h4>
+                    <h4>Publishers: {selectedGame.publishers}</h4>
+
+                    <button>Hide</button>
+                  </div>
+                </div>
+
+                <div className={styles.addToCart}></div>
+              </div>
             </section>
           </div>
         </AnimatedGamePage>
