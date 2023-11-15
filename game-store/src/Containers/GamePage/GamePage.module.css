@@ -113,17 +113,40 @@ header h1 {
     line-height: 1.65;
 }
 
-.aboutBottom {
-    height: 250px;
+.aboutBottom,
+.aboutBottomClosed {
     background-color: #262626;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     width: 110%;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
-    padding: 30px 70px 30px 34px;
     box-sizing: border-box;
 }
 
-.aboutBottom a {
+.lastChild {
+    padding-bottom: 6px;
+}
+
+.aboutBottom {
+    padding: 30px 35px 20px 34px;  
+}
+
+.aboutBottomClosed {
+    padding: 20px 35px 20px 34px;  
+}
+
+.open {
+    display: flex;
+    flex-direction: column;
+}
+
+.closed {
+    display: none;
+}
+
+.aboutBottom div a {
     text-decoration: none;
     color: white;
     margin-bottom: 11px;
@@ -131,11 +154,54 @@ header h1 {
     font-family: "GT Medium";
 }
 
-.aboutBottom h4 {
+.aboutBottom div h4 {
     line-height: 1.2;
     font-size: 0.9em;
     letter-spacing: 1px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     color: #999999;
     font-family: "GT Light";
+}
+
+.buttonNotHovered,
+.buttonHovered {
+    width: 20%;
+    cursor: pointer;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-self: flex-end;
+    background-color: transparent;
+    border: 1px transparent;
+    font-family: "GT Medium";
+    font-size: 1.025em;
+    gap: 4px;
+    transition: 0.2s all;
+}
+
+.buttonHovered *,
+.buttonNotHovered * {
+    pointer-events: none;
+}
+
+.buttonHovered {
+    color: #fff;
+}
+
+.buttonNotHovered {
+    color: #cccccc;
+}
+
+.aboutBottom button:active {
+    transform: scale(0.9);
+}
+
+.up,
+.down {
+    fill: #CCCCCC;
+    height: 16px;
+}
+
+.down {
+    transform: rotate(180deg);
 }

@@ -102,6 +102,18 @@ function App() {
       hovered: false,
       selected: false,
     },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
   ]);
 
   const navigate = useNavigate();
