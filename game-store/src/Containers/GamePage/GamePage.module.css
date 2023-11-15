@@ -46,6 +46,7 @@ header h1 {
     padding-top: 1px;
     width: 20px;
     height: 20px;
+    pointer-events: none;
 }
 
 .arrow,
@@ -83,6 +84,7 @@ header h1 {
     border: 1px transparent;
     background-color: #1A1A1A;
     overflow: scroll;
+    overflow-x: hidden;
 }
 
 .aboutTop::after {
@@ -204,4 +206,101 @@ header h1 {
 
 .down {
     transform: rotate(180deg);
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+  }
+  
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+
+  }
+  
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+  
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+.addToCart {
+    background: #1A1A1A;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    box-sizing: border-box;
+    width: 110%;
+}
+
+.addToCart h3 {
+    font-family: "GT Light";
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.addToCart button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+    font-family: "GT Medium";
+    gap: 12px;
+    background-color: transparent;
+    border: 1px transparent;
+    color: #999999;
+    transition: 0.25s all;
+    cursor: pointer;
+}
+
+.addToCart button * {
+    pointer-events: none;
+}
+
+.addToCart button:active {
+    transform: scale(0.925);
+}
+
+.add {
+    height: 18px;
+    padding-top: 3px;
+    fill: #999999;
+    transition: 0.25s all;
+    pointer-events: none;
+}
+
+.infos {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+}
+
+.infos button {
+    width: 26px;
+    height: 26px;
+}
+
+.like,
+.liked {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+}
+
+.like {
+    fill: #999;
+
+    transition-duration: 0.3s;
+}
+
+.liked {
+    fill: #F53333;
+    transition-duration: 0.3s;
 }

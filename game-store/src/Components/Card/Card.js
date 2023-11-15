@@ -27,7 +27,7 @@ const Card = (props) => {
       animate="animate"
       exit="exit"
     >
-      <img src={require(`../../Resources/image/gameFootage/${game.surname}.jpg`)} className={styles.img} />
+      <img src={game.cover} className={styles.img} />
 
       <div className={styles.price}>
         {game.inCart ? (
@@ -39,7 +39,7 @@ const Card = (props) => {
       </div>
       <h2 className={styles.name}>{game.name}</h2>
       <button className={styles.like} id={game.id} onClick={handleLike}>
-        <Like style={{ fill: game.isLiked ? "#ed4956" : "#cccccc" }} className={styles.likeSVG} />
+        <Like style={{ fill: game.isLiked ? "#F53333" : "#cccccc" }} className={styles.likeSVG} />
       </button>
     </motion.div>
   );
