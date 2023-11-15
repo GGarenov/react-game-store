@@ -35,7 +35,7 @@ const Card = (props) => {
         ) : (
           <AddToCart game={game} handleHoverGame={handleHoverGame} handleAddToCart={handleAddToCart} />
         )}
-        {game.price}
+        ${game.price}
       </div>
       <h2 className={styles.name}>{game.name}</h2>
       <button className={styles.like} id={game.id} onClick={handleLike}>
