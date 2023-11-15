@@ -129,6 +129,15 @@ function App() {
   ]);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  if (location.pathname != "/" && location.pathname != "/browse" && selectedGame.surname == undefined) {
+    let surname = location.pathname.substring(7);
+    let currentGame = games.find((game) => game.surname === surname);
+    if (currentGame != undefined) {
+      setSelectedGame(currentGame);
+    }
+  }
 
   async function handleBrowse() {
     setExtended(false);
@@ -172,7 +181,7 @@ function App() {
       return;
     } else if (e.target.classList[0] != "AddToCart_addToCart__zbJPe") {
       setSelectedGame(games[e.target.parentNode.id]);
-      navigate(`/${games[e.target.parentNode.id].surname}`);
+      navigate(`/games/${games[e.target.parentNode.id].surname}`);
     }
   };
 
@@ -263,7 +272,6 @@ function App() {
     setHoverState([...hoverState, (hoverState[21] = newHoverState)]);
   };
 
-  const location = useLocation();
   useEffect(() => {
     if (location.pathname === "/") {
       setBrowsing(false);
@@ -310,6 +318,10 @@ function App() {
               handleOpenCart={handleOpenCart}
               handleCloseCart={handleCloseCart}
               clearCart={clearCart}
+              handleAddToCart={handleAddToCart}
+              handleLike={handleLike}
+              handleHoverGame={handleHoverGame}
+              handleSelectGame={handleSelectGame}
             />
           }
         />
@@ -349,7 +361,7 @@ function App() {
           }
         />
         <Route
-          path="/:gameId"
+          path="/games/:gameId"
           element={
             <GamePage
               cart={cart}
@@ -378,6 +390,28 @@ function App() {
               handleOpenCart={handleOpenCart}
               handleCloseCart={handleCloseCart}
               clearCart={clearCart}
+            />
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <NotFound
+              cartDisplayed={cartDisplayed}
+              handleCloseCart={handleCloseCart}
+              handleOpenCart={handleOpenCart}
+              cartAmount={cartAmount}
+              clearCart={clearCart}
+              hoverState={hoverState}
+              handleHome={handleHome}
+              handleHover={handleHover}
+              cart={cart}
+              browsing={browsing}
+              search={search}
+              searching={searching}
+              handleSearch={handleSearch}
+              handleSearchSubmit={handleSearchSubmit}
+              handleBrowse={handleBrowse}
             />
           }
         />

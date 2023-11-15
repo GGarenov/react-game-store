@@ -10,6 +10,7 @@ const Grid = (props) => {
     reviewDisplay,
     handleLike,
     handleHoverGame,
+    hoverState,
     handleAddToCart,
     grid,
     search,
@@ -51,6 +52,7 @@ const Grid = (props) => {
                       handleHoverGame={handleHoverGame}
                       handleAddToCart={handleAddToCart}
                       handleSelectGame={handleSelectGame}
+                      hoverState={hoverState}
                     />
                   );
                 }
@@ -64,6 +66,7 @@ const Grid = (props) => {
                     handleHoverGame={handleHoverGame}
                     handleAddToCart={handleAddToCart}
                     handleSelectGame={handleSelectGame}
+                    hoverState={hoverState}
                   />
                 );
               })
@@ -78,6 +81,7 @@ const Grid = (props) => {
                     handleHoverGame={handleHoverGame}
                     handleAddToCart={handleAddToCart}
                     handleSelectGame={handleSelectGame}
+                    hoverState={hoverState}
                   />
                 );
               }
@@ -92,6 +96,7 @@ const Grid = (props) => {
                     handleHoverGame={handleHoverGame}
                     handleAddToCart={handleAddToCart}
                     handleSelectGame={handleSelectGame}
+                    hoverState={hoverState}
                   />
                 );
               }

@@ -163,6 +163,7 @@ const Browse = (props) => {
               searching={searching}
               handleSelectGame={handleSelectGame}
               cartDisplayed={cartDisplayed}
+              hoverState={hoverState}
             />
           </div>
         </div>

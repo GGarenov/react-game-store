@@ -6,7 +6,7 @@ import { ReactComponent as Cart } from "../../Resources/image/cart.svg";
 import { ReactComponent as GitHub } from "../../Resources/image/github.svg";
 import { ReactComponent as Search } from "../../Resources/image/search.svg";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const NavBar = (props) => {
   const {
@@ -36,6 +36,8 @@ const NavBar = (props) => {
     visible: { opacity: 1 },
   };
 
+  const location = useLocation();
+
   return (
     <>
       <motion.div
@@ -62,7 +64,7 @@ const NavBar = (props) => {
               <>
                 <motion.div
                   animate="visible"
-                  initial="hidden"
+                  initial={location.pathname === "/browse" ? "hidden" : "visible"}
                   variants={searchVariants}
                   transition={{ opacity: { type: "spring" }, duration: 0.01, delay: 0.4 }}
                   className={styles.searchdiv}
@@ -96,7 +98,7 @@ const NavBar = (props) => {
         <div className={styles.navbar_right}>
           <div className={styles.githubdiv} id="2" onMouseEnter={handleHover} onMouseLeave={handleHover}>
             <GitHub className={styles.gh} style={{ fill: hoverState[2].hovered ? "#fff" : "#cccccc" }} />
-            <h3 style={{ color: hoverState[2].hovered ? "#fff" : "#cccccc" }}>GitHub</h3>
+            <h3 style={{ color: hoverState[2].hovered ? "#fff" : "#cccccc" }}>gianlucajahn</h3>
           </div>
 
           <div

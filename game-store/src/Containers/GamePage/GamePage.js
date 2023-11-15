@@ -1,48 +1,224 @@
-import styles from "./Card.module.css";
-import React from "react";
+import styles from "./GamePage.module.css";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import AnimatedGamePage from "../AnimatedPage/AnimatedGamePage";
+import NavBar from "../../Components/NavBar/NavBar";
+import { ReactComponent as Arrow } from "../../Resources/image/arrow.svg";
+import { ReactComponent as Up } from "../../Resources/image/up.svg";
+import { ReactComponent as Down } from "../../Resources/image/down.svg";
 import { ReactComponent as Like } from "../../Resources/image/like.svg";
+import Slider from "../../Components/Slider/Slider";
+import games from "../../utils/games";
+import AnimatedText from "../AnimatedPage/AnimatedText";
 import { ReactComponent as Add } from "../../Resources/image/add.svg";
-import { motion } from "framer-motion";
-import AddToCart from "../AddToCart/AddToCart";
-import AddedToCart from "../AddedToCart/AddedToCart";
-import AnimatedCard from "../../Containers/AnimatedPage/AnimatedCard";
+import AddedToCartBig from "../../Components/AddedToCart/AddedToCartBig";
+import Cart from "../../Components/Cart/Cart";
 
-const Card = (props) => {
-  const { game, handleAddToCart, handleHover, handleLike, handleHoverGame, handleSelectGame } = props;
+const GamePage = (props) => {
+  const {
+    handleHover,
+    hoverState,
+    handleHome,
+    landingPage,
+    cartAmount,
+    cart,
+    search,
+    searching,
+    handleSearch,
+    handleSearchSubmit,
+    browsing,
+    handleBrowse,
+    selectedGame,
+    setSelectedGame,
+    setHoverState,
+    allGames,
+    extended,
+    setExtended,
+    handleAddToCart,
+    handleLike,
+    textExtended,
+    setTextExtended,
+    handleOpenCart,
+    handleCloseCart,
+    cartDisplayed,
+    clearCart,
+  } = props;
 
-  const variants = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
+  let { gameId } = useParams();
+  const location = useLocation();
+  const [carouselState, setCarouselState] = useState(0);
+
+  const incrementCarousel = (e) => {
+    if (carouselState === 3) {
+      setCarouselState(0);
+    } else {
+      setCarouselState(carouselState + 1);
+    }
+  };
+
+  const decrementCarousel = (e) => {
+    if (carouselState === 0) {
+      setCarouselState(3);
+    } else {
+      setCarouselState(carouselState - 1);
+    }
+  };
+
+  const extendText = () => {
+    setTextExtended(!textExtended);
+  };
+
+  const handleExtend = (e) => {
+    if (document.getElementById("20").innerHTML === "More") {
+      document.getElementById("20").className = "aboutBottom";
+    } else if (document.getElementById("20").innerHTML === "Hide") {
+      document.getElementById("20").className = "aboutBottomClosed";
+    }
+    setExtended(!extended);
+    if (textExtended === false) {
+      setTimeout(extendText, 500);
+    } else {
+      setTextExtended(!textExtended);
+    }
   };
 
   return (
-    <motion.div
-      className={styles.card}
-      onClick={handleSelectGame}
-      id={game.id}
-      style={{ margin: 0, padding: 0 }}
-      variants={variants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-    >
-      <img src={game.cover} className={styles.img} />
+    <>
+      <div className={styles.gamepage}>
+        {cartDisplayed ? (
+          <Cart
+            cartDisplayed={cartDisplayed}
+            handleOpenCart={handleOpenCart}
+            handleCloseCart={handleCloseCart}
+            cart={cart}
+            cartAmount={cartAmount}
+            handleHover={handleHover}
+            hoverState={hoverState}
+            clearCart={clearCart}
+          />
+        ) : null}
 
-      <div className={styles.price}>
-        {game.inCart ? (
-          <AddedToCart />
-        ) : (
-          <AddToCart game={game} handleHoverGame={handleHoverGame} handleAddToCart={handleAddToCart} />
-        )}
-        ${game.price}
+        <NavBar
+          handleHover={handleHover}
+          hoverState={hoverState}
+          handleHome={handleHome}
+          browsing={browsing}
+          landingPage={landingPage}
+          cartAmount={cartAmount}
+          search={search}
+          searching={searching}
+          handleSearch={handleSearch}
+          handleSearchSubmit={handleSearchSubmit}
+          handleOpenCart={handleOpenCart}
+          handleCloseCart={handleCloseCart}
+        />
+
+        <AnimatedGamePage>
+          <div className={styles.gamepageContent}>
+            <header>
+              <button
+                style={{ color: hoverState[19].hovered ? "#92f" : "#cccccc" }}
+                className={styles.goBack}
+                onMouseEnter={handleHover}
+                onMouseLeave={handleHover}
+                onClick={handleBrowse}
+                id="19"
+              >
+                <Arrow style={{ fill: hoverState[19].hovered ? "#92f" : "#cccccc" }} className={styles.arrow} />
+                Store
+              </button>
+
+              <h1>{selectedGame.name}</h1>
+            </header>
+
+            <section className={styles.game}>
+              {selectedGame != undefined ? (
+                <Slider
+                  selectedGame={selectedGame}
+                  setSelectedGame={setSelectedGame}
+                  allGames={allGames}
+                  incrementCarousel={incrementCarousel}
+                  decrementCarousel={decrementCarousel}
+                  carouselState={carouselState}
+                  setCarouselState={setCarouselState}
+                  hoverState={hoverState}
+                  handleHover={handleHover}
+                />
+              ) : null}
+              <div className={styles.gameInfo}>
+                <div className={styles.about}>
+                  <div className={styles.aboutTop}>
+                    <h2>About</h2>
+                    <p>{selectedGame.desc}</p>
+                  </div>
+                  <div
+                    className={
+                      extended
+                        ? `${styles.conditionalOpen} ${styles.aboutBottom}`
+                        : `${styles.conditionalClose} ${styles.aboutBottomClosed}`
+                    }
+                    id="about"
+                  >
+                    <AnimatedText>
+                      <div className={textExtended ? styles.open : styles.closed}>
+                        <a href={selectedGame.link} target="_blank">
+                          {selectedGame.name} Website
+                        </a>
+                        <h4>Released: {selectedGame.release}</h4>
+                        <h4>Platforms: {selectedGame.platforms}</h4>
+                        <h4>Main Genre: {selectedGame.genre}</h4>
+                        <h4>Developers: {selectedGame.developers}</h4>
+                        <h4 className={styles.lastChild}>Publishers: {selectedGame.publishers}</h4>
+                      </div>
+                    </AnimatedText>
+
+                    <button
+                      id="20"
+                      onClick={handleExtend}
+                      onMouseEnter={handleHover}
+                      onMouseLeave={handleHover}
+                      className={hoverState[20].hovered ? styles.buttonHovered : styles.buttonNotHovered}
+                    >
+                      {extended ? "Hide" : "More"}
+                      {extended ? (
+                        <Up className={styles.up} style={{ fill: hoverState[20].hovered ? "#fff" : "#cccccc" }} />
+                      ) : (
+                        <Up className={styles.down} style={{ fill: hoverState[20].hovered ? "#fff" : "#cccccc" }} />
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                <div className={styles.addToCart}>
+                  <div className={styles.infos}>
+                    <h3>${selectedGame.price}</h3>
+                    <button id={selectedGame.id} onClick={handleLike}>
+                      <Like className={selectedGame.isLiked ? styles.liked : styles.like} />
+                    </button>
+                  </div>
+                  {selectedGame.inCart ? (
+                    <AddedToCartBig />
+                  ) : (
+                    <button
+                      id="21"
+                      onMouseEnter={handleHover}
+                      onMouseLeave={handleHover}
+                      style={{ color: hoverState[21].hovered ? "#92f" : "#999999" }}
+                      onClick={handleAddToCart}
+                    >
+                      Add to cart
+                      <Add className={styles.add} style={{ fill: hoverState[21].hovered ? "#92f" : "#999999" }} />
+                    </button>
+                  )}
+                </div>
+              </div>
+            </section>
+          </div>
+        </AnimatedGamePage>
       </div>
-      <h2 className={styles.name}>{game.name}</h2>
-      <button className={styles.like} id={game.id} onClick={handleLike}>
-        <Like style={{ fill: game.isLiked ? "#F53333" : "#cccccc" }} className={styles.likeSVG} />
-      </button>
-    </motion.div>
+    </>
   );
 };
 
-export default Card;
+export default GamePage;

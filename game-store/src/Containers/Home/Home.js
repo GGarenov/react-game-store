@@ -10,6 +10,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import AnimatedPage from "../AnimatedPage/AnimatedPage";
 import Cart from "../../Components/Cart/Cart";
+import AnimatedHome from "../AnimatedPage/AnimatedHome";
+import AnimatedHomeBottom from "../AnimatedPage/AnimatedHomeBottom";
 
 const Home = (props) => {
   const { shownGames, cartAmount, cart, cartDisplayed, handleOpenCart, handleCloseCart, clearCart } = props;
@@ -19,27 +21,103 @@ const Home = (props) => {
   const [hoverState, setHoverState] = useState([
     {
       hovered: false,
+      selected: false,
     },
     {
       hovered: false,
+      selected: false,
     },
     {
       hovered: false,
+      selected: false,
     },
     {
       hovered: false,
+      selected: false,
     },
     {
       hovered: false,
+      selected: false,
     },
     {
       hovered: false,
+      selected: false,
     },
     {
       hovered: false,
+      selected: false,
     },
     {
       hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
+    },
+    {
+      hovered: false,
+      selected: false,
     },
   ]);
 
@@ -100,21 +178,15 @@ const Home = (props) => {
           handleOpenCart={handleOpenCart}
           handleCloseCart={handleCloseCart}
         />
-        <AnimatedPage>
+        <AnimatedHome>
           <motion.div className={styles.home_content}>
             <h1>Game Store</h1>
             <h2>„Heaven for gaming deals“ — IGN</h2>
           </motion.div>
-        </AnimatedPage>
+        </AnimatedHome>
       </div>
 
-      <motion.div
-        className={styles.buttons}
-        initial="hidden"
-        animate="visible"
-        variants={buttonVariants}
-        transition={{ x: { type: "spring" }, duration: 1.5 }}
-      >
+      <motion.div className={styles.buttons}>
         <button id="4" className={styles.parent} onMouseEnter={handleHover} onMouseLeave={handleHover}>
           <Credibility className={styles.svg} style={{ fill: hoverState[4].hovered ? "#000000" : "#cccccc" }} />
           <div>
@@ -140,18 +212,14 @@ const Home = (props) => {
         </button>
       </motion.div>
 
-      <motion.div
-        className={styles.home_cred}
-        initial="hidden"
-        animate="visible"
-        variants={variants}
-        transition={{ x: { type: "spring" }, duration: 1 }}
-      >
-        <button onClick={handleBrowse}>
-          <Browse className={styles.browse} />
-          Browse
-        </button>
-      </motion.div>
+      <AnimatedHomeBottom>
+        <motion.div className={styles.home_cred}>
+          <button onClick={handleBrowse}>
+            <img className={styles.triangle} src={require("../../Resources/image/triangle.png")} />
+            Browse
+          </button>
+        </motion.div>
+      </AnimatedHomeBottom>
     </div>
   );
 };
