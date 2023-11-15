@@ -152,7 +152,8 @@ const Browse = (props) => {
             <div className={styles.applied}>
               <div className={styles.filterList}>
                 <button className={styles.filterButton} aria-label="Current Filter">
-                  Filter by: <span>{currentFilter}</span>
+                  Filter by:
+                  <span> {currentFilter}</span>
                 </button>
                 <button
                   className={`${styles.filterButton} ${styles.clearButton}`}
