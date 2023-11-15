@@ -4,6 +4,7 @@ import { ReactComponent as Like } from "../../Resources/image/like.svg";
 import { ReactComponent as Add } from "../../Resources/image/add.svg";
 import AddToCart from "../AddToCart/AddToCart";
 import AddedToCart from "../AddedToCart/AddedToCart";
+import AnimatedCard from "../../Containers/AnimatedPage/AnimatedCard";
 
 const Card = (props) => {
   const { game, handleSelectGame, handleAddToCart, handleHover, handleLike, handleHoverGame } = props;
