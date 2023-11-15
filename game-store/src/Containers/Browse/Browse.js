@@ -24,6 +24,10 @@ const Browse = (props) => {
     allGames,
     setAllGames,
     handleLike,
+    handleHoverGame,
+    cart,
+    cartAmount,
+    handleAddToCart,
   } = props;
 
   const navigate = useNavigate();
@@ -61,6 +65,9 @@ const Browse = (props) => {
       setShownGames(filteredShownGames);
     } else if (currentFilter === "Reviews") {
       setReviewDisplay(true);
+    } else if (currentFilter === "Wishlist") {
+      let filteredShownGames = allGames.filter((game) => game.isLiked === true);
+      setShownGames(filteredShownGames);
     }
 
     if (currentFilter != "Reviews") {
@@ -77,6 +84,7 @@ const Browse = (props) => {
         handleHome={handleHome}
         browsing={browsing}
         landingPage={landingPage}
+        cartAmount={cartAmount}
       />
 
       <AnimatedPage>
@@ -124,7 +132,13 @@ const Browse = (props) => {
               </div>
             </div>
 
-            <Grid shownGames={shownGames} reviewDisplay={reviewDisplay} handleLike={handleLike} />
+            <Grid
+              shownGames={shownGames}
+              reviewDisplay={reviewDisplay}
+              handleLike={handleLike}
+              handleHoverGame={handleHoverGame}
+              handleAddToCart={handleAddToCart}
+            />
           </div>
         </div>
       </AnimatedPage>

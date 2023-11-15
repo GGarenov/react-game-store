@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = (props) => {
-  const { handleHover, hoverState, handleHome, handleBrowse, browsing, landingPage } = props;
+  const { handleHover, hoverState, handleHome, handleBrowse, browsing, landingPage, cartAmount } = props;
 
   const variants = {
     hidden: { opacity: 1, y: 15 },
@@ -81,7 +81,7 @@ const NavBar = (props) => {
 
           <div className={styles.cartdiv} id="3" onMouseEnter={handleHover} onMouseLeave={handleHover}>
             <Cart className={styles.svg} style={{ fill: hoverState[3].hovered ? "#fff" : "#cccccc" }} />
-            <h3 style={{ color: hoverState[3].hovered ? "#fff" : "#cccccc" }}>Cart: 0</h3>
+            <h3 style={{ color: hoverState[3].hovered ? "#fff" : "#cccccc" }}>Cart: {cartAmount}</h3>
           </div>
         </div>
       </motion.div>

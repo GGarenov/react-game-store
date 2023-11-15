@@ -10,7 +10,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Navigate, useNavigate } from "react-router-dom";
 import AnimatedPage from "../AnimatedPage/AnimatedPage";
 
-const Home = () => {
+const Home = (props) => {
+  const { shownGames, cartAmount, cart } = props;
+
   const [browsing, setBrowsing] = useState(false);
   const [landingPage, setLandingPage] = useState(true);
   const [hoverState, setHoverState] = useState([
@@ -43,12 +45,10 @@ const Home = () => {
   const navigate = useNavigate();
 
   const handleHover = (e) => {
-    const targetId = parseInt(e.target.id, 10); // Convert id to integer
-    if (!isNaN(targetId) && targetId >= 0 && targetId < hoverState.length) {
-      const newHoverState = [...hoverState];
-      newHoverState[targetId].hovered = !newHoverState[targetId].hovered;
-      setHoverState(newHoverState);
-    }
+    let newHoverState = hoverState[e.target.id];
+    newHoverState.hovered = !newHoverState.hovered;
+
+    setHoverState([...hoverState, (hoverState[e.target.id] = newHoverState)]);
   };
 
   const handleBrowse = () => {
@@ -83,6 +83,7 @@ const Home = () => {
           handleBrowse={handleBrowse}
           handleHome={handleHome}
           landingPage={landingPage}
+          cartAmount={cartAmount}
         />
         <AnimatedPage>
           <motion.div className={styles.home_content}>
