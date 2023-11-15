@@ -3,7 +3,6 @@ import styles from "./NavBar.module.css";
 import { ReactComponent as Logo } from "../../Resources/image/logo.svg";
 import { ReactComponent as Browse } from "../../Resources/image/browse.svg";
 import { ReactComponent as Cart } from "../../Resources/image/cart.svg";
-import { ReactComponent as NewCart } from "../../Resources/image/newCart.svg";
 import { ReactComponent as GitHub } from "../../Resources/image/github.svg";
 import { ReactComponent as Search } from "../../Resources/image/search.svg";
 import { motion } from "framer-motion";
@@ -81,7 +80,7 @@ const NavBar = (props) => {
           </div>
 
           <div className={styles.cartdiv} id="3" onMouseEnter={handleHover} onMouseLeave={handleHover}>
-            <NewCart
+            <Cart
               className={styles.svg2}
               style={{
                 fill: cartAmount ? "#90ee90" : "#0f1011",
