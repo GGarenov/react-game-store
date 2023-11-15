@@ -162,7 +162,7 @@ function App() {
   const location = useLocation();
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait" initial={false}>
       <Routes key={location.pathname} location={location}>
         <Route
           path="/"

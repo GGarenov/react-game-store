@@ -9,7 +9,18 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const NavBar = (props) => {
-  const { handleHover, hoverState, handleHome, handleBrowse, browsing, landingPage, cart, cartAmount } = props;
+  const {
+    handleHover,
+    hoverState,
+    handleHome,
+    handleBrowse,
+    browsing,
+    landingPage,
+    cart,
+    cartAmount,
+    search,
+    handleSearch,
+  } = props;
 
   const variants = {
     hidden: { opacity: 1, y: 15 },
@@ -52,7 +63,7 @@ const NavBar = (props) => {
                   transition={{ opacity: { type: "spring" }, duration: 0.01, delay: 0.4 }}
                   className={styles.searchdiv}
                 >
-                  <input placeholder="Search games..."></input>
+                  <input placeholder="Search games..." value={search} onChange={handleSearch}></input>
                   <Search
                     className={styles.svg}
                     style={{ fill: hoverState[7].hovered ? "#fff" : "#cccccc" }}

@@ -2,9 +2,24 @@ import styles from "./Grid.module.css";
 import React, { useEffect } from "react";
 import Card from "../Card/Card";
 import AnimatedPage from "../../Containers/AnimatedPage/AnimatedPage";
+import { v4 as uuidv4 } from "uuid";
 
 const Grid = (props) => {
-  const { shownGames, reviewDisplay, handleLike, handleHoverGame, handleAddToCart, loading, setLoading } = props;
+  const { shownGames, reviewDisplay, handleLike, handleHoverGame, handleAddToCart, grid } = props;
+
+  useEffect(() => {
+    if (grid === false) {
+      if (document.getElementsByClassName("gridContainer")) {
+        let grid = document.getElementById("gridContainer");
+        grid.className = styles.noGrid;
+      }
+    } else if (grid) {
+      if (document.getElementById("gridContainer").className === styles.noGrid) {
+        let grid = document.getElementById("gridContainer");
+        grid.className = styles.gridContainer;
+      }
+    }
+  }, [grid]);
 
   return (
     <>
@@ -12,12 +27,12 @@ const Grid = (props) => {
         <h2>There are no reviews yet!</h2>
         <h3>You can add some, soon.</h3>
       </div>
-      <div className={styles.gridContainer} style={{ display: reviewDisplay ? "none" : "grid" }} id="test">
+      <div className={styles.gridContainer} style={{ display: reviewDisplay ? "none" : "grid" }} id="gridContainer">
         {shownGames.map((game, i) => {
           return (
             <Card
               game={game}
-              key={i}
+              key={game.name}
               handleLike={handleLike}
               handleHoverGame={handleHoverGame}
               handleAddToCart={handleAddToCart}
