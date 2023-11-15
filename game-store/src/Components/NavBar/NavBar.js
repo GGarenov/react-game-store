@@ -55,8 +55,8 @@ const NavBar = (props) => {
             onMouseLeave={handleHover}
             onClick={handleHome}
           >
-            <Logo className={styles.svg} style={{ fill: hoverState[0].hovered ? "#fff" : "#cccccc" }} />
-            <h3 style={{ color: hoverState[0].hovered ? "#fff" : "#cccccc" }}>Game Store</h3>
+            <Logo className={styles.svg} style={{ fill: "#fff" }} />
+            <h3>Game Store</h3>
           </div>
 
           <div className={styles.pathdiv} id="1" onMouseEnter={handleHover} onMouseLeave={handleHover}>
@@ -86,10 +86,8 @@ const NavBar = (props) => {
               </>
             ) : (
               <>
-                <Browse className={styles.svg} style={{ fill: hoverState[1].hovered ? "#fff" : "#cccccc" }} />
-                <h3 style={{ color: hoverState[1].hovered ? "#fff" : "#cccccc" }} onClick={handleBrowse}>
-                  Browse Store
-                </h3>
+                <Browse className={styles.svg} style={{ fill: "#fff" }} />
+                <h3 onClick={handleBrowse}>Browse Store</h3>
               </>
             )}
           </div>
@@ -97,8 +95,8 @@ const NavBar = (props) => {
 
         <div className={styles.navbar_right}>
           <div className={styles.githubdiv} id="2" onMouseEnter={handleHover} onMouseLeave={handleHover}>
-            <GitHub className={styles.gh} style={{ fill: hoverState[2].hovered ? "#fff" : "#cccccc" }} />
-            <h3 style={{ color: hoverState[2].hovered ? "#fff" : "#cccccc" }}>gianlucajahn</h3>
+            <GitHub className={styles.gh} />
+            <h3>gianlucajahn</h3>
           </div>
 
           <div
@@ -112,14 +110,12 @@ const NavBar = (props) => {
               onClick={handleOpenCart}
               className={styles.svg2}
               style={{
-                fill: cartAmount ? "#90ee90" : "#0f1011",
+                fill: cartAmount ? "#90ee90" : "transparent",
                 stroke: cartAmount ? "" : "#fff",
                 strokeWidth: "34px",
               }}
             />
-            <h3 style={{ color: hoverState[3].hovered ? "#fff" : "#cccccc" }} onClick={handleOpenCart}>
-              Cart: {cartAmount}
-            </h3>
+            <h3 onClick={handleOpenCart}>Cart: {cartAmount}</h3>
           </div>
         </div>
       </motion.div>

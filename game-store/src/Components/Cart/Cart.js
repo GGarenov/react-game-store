@@ -7,8 +7,18 @@ import AnimatedCart from "../../Containers/AnimatedPage/AnimatedCart";
 import AnimatedCard from "../../Containers/AnimatedPage/AnimatedCard";
 
 const Cart = (props) => {
-  const { cartAmount, cart, handleOpenCart, handleCloseCart, cartDisplayed, handleHover, hoverState, clearCart } =
-    props;
+  const {
+    cartAmount,
+    cart,
+    handleOpenCart,
+    handleCloseCart,
+    cartDisplayed,
+    handleHover,
+    hoverState,
+    clearCart,
+    handleRemoveFromCart,
+    handleOpenGamePage,
+  } = props;
 
   const [total, setTotal] = useState(0);
   let newTotal = 0;
@@ -52,7 +62,7 @@ const Cart = (props) => {
                     <h3>{item.name}</h3>
                     <div>
                       ${item.price}
-                      <button>
+                      <button id={item.id} onClick={handleRemoveFromCart} className={styles.removeButton}>
                         <Cross className={styles.cross} />
                       </button>
                     </div>

@@ -14,6 +14,7 @@ import AnimatedText from "../AnimatedPage/AnimatedText";
 import { ReactComponent as Add } from "../../Resources/image/add.svg";
 import AddedToCartBig from "../../Components/AddedToCart/AddedToCartBig";
 import Cart from "../../Components/Cart/Cart";
+import templateGame from "../../utils/templateGame";
 
 const GamePage = (props) => {
   const {
@@ -43,6 +44,7 @@ const GamePage = (props) => {
     handleCloseCart,
     cartDisplayed,
     clearCart,
+    handleRemoveFromCart,
   } = props;
 
   let { gameId } = useParams();
@@ -96,6 +98,7 @@ const GamePage = (props) => {
             handleHover={handleHover}
             hoverState={hoverState}
             clearCart={clearCart}
+            handleRemoveFromCart={handleRemoveFromCart}
           />
         ) : null}
 
@@ -129,11 +132,11 @@ const GamePage = (props) => {
                 Store
               </button>
 
-              <h1>{selectedGame.name}</h1>
+              <h1>{selectedGame ? selectedGame.name : templateGame.name}</h1>
             </header>
 
             <section className={styles.game}>
-              {selectedGame != undefined ? (
+              {
                 <Slider
                   selectedGame={selectedGame}
                   setSelectedGame={setSelectedGame}
@@ -145,12 +148,12 @@ const GamePage = (props) => {
                   hoverState={hoverState}
                   handleHover={handleHover}
                 />
-              ) : null}
+              }
               <div className={styles.gameInfo}>
                 <div className={styles.about}>
                   <div className={styles.aboutTop}>
                     <h2>About</h2>
-                    <p>{selectedGame.desc}</p>
+                    <p>{selectedGame ? selectedGame.desc : templateGame.desc}</p>
                   </div>
                   <div
                     className={
@@ -162,14 +165,16 @@ const GamePage = (props) => {
                   >
                     <AnimatedText>
                       <div className={textExtended ? styles.open : styles.closed}>
-                        <a href={selectedGame.link} target="_blank">
-                          {selectedGame.name} Website
+                        <a href={selectedGame ? selectedGame.link : templateGame.link} target="_blank">
+                          {selectedGame ? selectedGame.name : "No"} Website
                         </a>
-                        <h4>Released: {selectedGame.release}</h4>
-                        <h4>Platforms: {selectedGame.platforms}</h4>
-                        <h4>Main Genre: {selectedGame.genre}</h4>
-                        <h4>Developers: {selectedGame.developers}</h4>
-                        <h4 className={styles.lastChild}>Publishers: {selectedGame.publishers}</h4>
+                        <h4>Released: {selectedGame ? selectedGame.release : templateGame.release}</h4>
+                        <h4>Platforms: {selectedGame ? selectedGame.platforms : templateGame.platforms}</h4>
+                        <h4>Main Genre: {selectedGame ? selectedGame.genre : templateGame.genre}</h4>
+                        <h4>Developers: {selectedGame ? selectedGame.developers : templateGame.developers}</h4>
+                        <h4 className={styles.lastChild}>
+                          Publishers: {selectedGame ? selectedGame.publishers : templateGame.publishers}
+                        </h4>
                       </div>
                     </AnimatedText>
 
@@ -192,23 +197,38 @@ const GamePage = (props) => {
 
                 <div className={styles.addToCart}>
                   <div className={styles.infos}>
-                    <h3>${selectedGame.price}</h3>
-                    <button id={selectedGame.id} onClick={handleLike}>
-                      <Like className={selectedGame.isLiked ? styles.liked : styles.like} />
+                    <h3>${selectedGame ? selectedGame.price : templateGame.price}</h3>
+                    <button id={selectedGame ? selectedGame.id : templateGame.id} onClick={handleLike}>
+                      <Like
+                        className={selectedGame ? (selectedGame.isLiked ? styles.liked : styles.like) : styles.like}
+                      />
                     </button>
                   </div>
-                  {selectedGame.inCart ? (
-                    <AddedToCartBig />
+                  {selectedGame ? (
+                    selectedGame.inCart ? (
+                      <AddedToCartBig />
+                    ) : (
+                      <button
+                        id="21"
+                        onMouseEnter={handleHover}
+                        onMouseLeave={handleHover}
+                        style={{ color: hoverState[21].hovered ? "#92f" : "#999999" }}
+                        onClick={handleAddToCart}
+                      >
+                        Add to cart
+                        <Add className={styles.add} style={{ fill: hoverState[21].hovered ? "#92f" : "#999999" }} />
+                      </button>
+                    )
                   ) : (
                     <button
                       id="21"
                       onMouseEnter={handleHover}
                       onMouseLeave={handleHover}
-                      style={{ color: hoverState[21].hovered ? "#92f" : "#999999" }}
+                      style={{ color: hoverState[21].hovered ? "#D2042D" : "#999999" }}
                       onClick={handleAddToCart}
                     >
-                      Add to cart
-                      <Add className={styles.add} style={{ fill: hoverState[21].hovered ? "#92f" : "#999999" }} />
+                      Not available
+                      <Add className={styles.add} style={{ fill: hoverState[21].hovered ? "#D2042D" : "#999999" }} />
                     </button>
                   )}
                 </div>

@@ -9,6 +9,7 @@ import Home from "./Containers/Home/Home";
 import { AnimatePresence } from "framer-motion";
 import filterNames from "./utils/filterNames";
 import games from "./utils/games";
+import templateGame from "./utils/templateGame";
 
 function App() {
   const [currentFilter, setCurrentFilter] = useState("none");
@@ -22,7 +23,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [searching, setSearching] = useState(false);
   const [browsing, setBrowsing] = useState(true);
-  const [selectedGame, setSelectedGame] = useState({});
+  const [selectedGame, setSelectedGame] = useState(false);
   const [extended, setExtended] = useState(false);
   const [textExtended, setTextExtended] = useState(false);
   const [hoverState, setHoverState] = useState([
@@ -131,11 +132,13 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  if (location.pathname != "/" && location.pathname != "/browse" && selectedGame.surname == undefined) {
+  if (location.pathname != "/" && location.pathname != "/browse" && selectedGame === false) {
     let surname = location.pathname.substring(7);
     let currentGame = games.find((game) => game.surname === surname);
     if (currentGame != undefined) {
       setSelectedGame(currentGame);
+    } else {
+      setSelectedGame(templateGame);
     }
   }
 
@@ -272,6 +275,48 @@ function App() {
     setHoverState([...hoverState, (hoverState[21] = newHoverState)]);
   };
 
+  const handleNavGamePage = () => {
+    setExtended(false);
+    setTextExtended(false);
+    setCartDisplayed(false);
+    setHoverState([...hoverState, (hoverState[21].hovered = false)]);
+    navigate("/games/riseofthetombraider");
+  };
+
+  const handleNavNotFoundPage = () => {
+    navigate("/this-page");
+  };
+
+  const handleNavNotFoundQuery = () => {
+    navigate("/games/404");
+  };
+
+  const handlePlayDice = () => {
+    let randomIndex = Math.floor(Math.random() * 32);
+    let randomSurname = allGames[randomIndex].surname;
+    navigate(`games/${randomSurname}`);
+  };
+
+  const handleRemoveFromCart = (e) => {
+    let removedIndex = cart.findIndex((game) => game.id == e.target.id);
+    let newAllGames = allGames.map((game, i) => {
+      if (game.id == e.target.id) {
+        game.inCart = false;
+        game.isHovered = false;
+        return game;
+      } else {
+        return game;
+      }
+    });
+    setAllGames(newAllGames);
+    let firstHalf = cart.slice(0, removedIndex);
+    let secondHalf = cart.slice(removedIndex + 1);
+    let addedUp = firstHalf.concat(secondHalf);
+    setCart(addedUp);
+    setCartAmount(cartAmount - 1);
+    setHoverState([...hoverState, (hoverState[21].hovered = false)]);
+  };
+
   useEffect(() => {
     if (location.pathname === "/") {
       setBrowsing(false);
@@ -322,6 +367,11 @@ function App() {
               handleLike={handleLike}
               handleHoverGame={handleHoverGame}
               handleSelectGame={handleSelectGame}
+              handleRemoveFromCart={handleRemoveFromCart}
+              handleNavGamePage={handleNavGamePage}
+              handleNavNotFoundPage={handleNavNotFoundPage}
+              handleNavNotFoundQuery={handleNavNotFoundQuery}
+              handlePlayDice={handlePlayDice}
             />
           }
         />
@@ -357,6 +407,7 @@ function App() {
               handleOpenCart={handleOpenCart}
               handleCloseCart={handleCloseCart}
               clearCart={clearCart}
+              handleRemoveFromCart={handleRemoveFromCart}
             />
           }
         />
@@ -390,6 +441,7 @@ function App() {
               handleOpenCart={handleOpenCart}
               handleCloseCart={handleCloseCart}
               clearCart={clearCart}
+              handleRemoveFromCart={handleRemoveFromCart}
             />
           }
         />
@@ -412,6 +464,7 @@ function App() {
               handleSearch={handleSearch}
               handleSearchSubmit={handleSearchSubmit}
               handleBrowse={handleBrowse}
+              handleRemoveFromCart={handleRemoveFromCart}
             />
           }
         />

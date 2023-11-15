@@ -24,6 +24,7 @@ const NotFound = (props) => {
     searching,
     handleSearch,
     handleSearchSubmit,
+    handleRemoveFromCart,
   } = props;
   const location = useLocation();
 
@@ -58,6 +59,7 @@ const NotFound = (props) => {
           handleHover={handleHover}
           hoverState={hoverState}
           clearCart={clearCart}
+          handleRemoveFromCart={handleRemoveFromCart}
         />
       ) : null}
 

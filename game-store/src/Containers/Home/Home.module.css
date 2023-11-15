@@ -13,130 +13,173 @@ body {
     pointer-events: none;
 }
 
-.main {
-    background-color: #0f1011;
+.container {
+    display: flex;
+    justify-content: space-between;
 }
 
-.home {
-    background: url("../../Resources/image/background.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 70vh;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
-    padding-bottom: 6.5vh;
+.careers {
+    color: #45c1bc;
+    font-family: "GT Medium";
 }
 
-.home:after {
-    clip-path: polygon(0 0, 100% 20%, 100% 100%, 0 100%);
+a {
+    text-decoration: none;
 }
 
-.home_content {
-    margin-top: 31.5vh;
+.left,
+.right {
+    width: 50vw;
+    height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
 }
 
-.home_content h1 {
-    font-family: "GT Bold";
-    font-size: 110px;
-    color: #fff;
-    text-shadow: 14px 10px 40px black
+.right {
+    align-items: flex-end;
 }
 
-.home_content h2 {
-    color: white;
-    font-family: "GT Bold";
-    text-shadow: 4px 4px 7px black
+.left .buttons .browseBtn {
+    background-color: #45c1bc;
+}
+
+.buttonsRight {
+    margin-right: 40px;
+    position: relative;
+    border-radius: 20px;
+    padding: 22px 30px 30px 30px;
+    box-sizing: border-box;
+    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    backdrop-filter: blur(6px);
+}
+
+.buttonsRight button {
+    width: 100%;
+    justify-content: flex-start;
+    padding-left: 48px;
+    gap: 15px;
+}
+
+.buttonsRight h2 {
+    font-size: 26px;
+    margin-bottom: 14px;
+}
+
+.technologies {
+    height: 18px;
+    width: 18px;
+}
+
+.video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    background-attachment: fixed;
+  }
+
+.splash {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 630px;
+    height: 240px;
+    box-sizing: border-box;
+    padding: 22px 35px 55px 50px;
+    margin-left: 44px;
+    border-radius: 30px;
+    z-index: 6;
+    backdrop-filter: blur(8px);
 }
 
 .buttons {
-    z-index: 10;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    top: 66%;
     display: flex;
-    justify-content: center;
-    gap: 100px;
-}
-
-.buttons button {
-    background-color: black;
-    border: 1px transparent;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    padding: 4px 26px 5px 16px;
-    transition: 0.3s ease-in-out;
-}
-
-.buttons button:hover {
-    background-color: #79d2b5;
-}
-
-.svg {
-    transform: scale(0.85);
-    fill: rgb(219, 219, 219);
-    transition: 0.3s;
-}
-
-.svg:hover {
-    fill: #fff
-}
-
-.home_cred {
-    display: flex;
-    justify-content: center;
-    background-color: #0f1011;
-    height: 23.5vh;
-    display: flex;
-}
-
-button div {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-}
-
-.home_cred button {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 14px;
-    height: 110px;
-    width: 325px;
-    border: 1px transparent;
+    position: relative;
+    width: 630px;
+    height: 70px;
+    box-sizing: border-box;
+    padding: 14px 20px 15px 20px;
+    margin-left: 44px;
+    margin-top: 15px;
     border-radius: 30px;
-    background-color: #79d2b5;
-    font-family: "GT Bold";
-    font-size: 48px;
+    z-index: 6;
+    backdrop-filter: blur(8px);
+    justify-content: space-between;
+}
+
+.cta {
+    background-color: #fff;
+    border: 1px transparent;
+    border-radius: 18px;
+    color: black;
+    padding: 10px 28px;
+    display: flex;
+    gap: 12px;
+    font-family: "GT Medium";
+    font-size: 16px;
+    transition: 0.3s all;
     cursor: pointer;
-    transition: ease-in-out 0.2s;
 }
 
-.home_cred button:active {
-    transform: scale(0.9);
+.cta:hover {
+    transform: scale(1.03);
 }
 
-.browse {
-    stroke: #000000;
-    stroke-width: 2px;
+.cta * {
+    pointer-events: none;
 }
 
-h3,
-p {
-    transition: all 0.2s;
+.cta .linkedin {
+    padding-bottom: 1px;
 }
 
-.triangle {
-    width: 45x;
-    height: 45px;
+.lastChild {
+    gap: 10px;
 }
-  
+
+.cta span {
+    padding-top: 1px;
+}
+
+.ctaSVG {
+    height: 18px;
+    width: 18px;
+}
+
+.buttons::after,
+.splash::after,
+.buttonsRight::after {
+    content: "";
+    position: absolute;
+    border-radius: 30px;
+    inset: 0.01%;
+    height: inherit;
+    width: inherit;
+    z-index: -1;
+    background-color: white;
+    opacity: 0.285;
+}
+
+.intro {
+    color: white;
+    padding-left: 5px;
+    font-family: "GT Regular";
+    font-size: 19px;
+    opacity: 1;
+}
+
+.splash h1 {
+    font-family: "GT Bold";
+    font-size: 90px;
+    color: white;
+}
+
+.home h2 {
+    color: white;
+    font-family: "GT Bold";
+}
