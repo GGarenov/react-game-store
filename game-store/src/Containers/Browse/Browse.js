@@ -28,6 +28,7 @@ const Browse = (props) => {
     cart,
     cartAmount,
     handleAddToCart,
+    handleSelectGame,
   } = props;
 
   const navigate = useNavigate();
@@ -35,6 +36,7 @@ const Browse = (props) => {
   const [landingPage, setLandingPage] = useState(false);
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");
+  const [searching, setSearching] = useState(false);
 
   const handleBrowse = () => {
     navigate("/browse");
@@ -52,7 +54,15 @@ const Browse = (props) => {
     }
   };
 
-  const handleSearch = (e) => {};
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    setSearching(false);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setSearching(true);
+  };
 
   useEffect(() => {
     if (currentFilter == "none") {
@@ -89,7 +99,9 @@ const Browse = (props) => {
         landingPage={landingPage}
         cartAmount={cartAmount}
         search={search}
+        searching={searching}
         handleSearch={handleSearch}
+        handleSearchSubmit={handleSearchSubmit}
       />
 
       <AnimatedPage exitBeforeEnter>
@@ -134,6 +146,9 @@ const Browse = (props) => {
               handleHoverGame={handleHoverGame}
               handleAddToCart={handleAddToCart}
               grid={grid}
+              search={search}
+              searching={searching}
+              handleSelectGame={handleSelectGame}
             />
           </div>
         </div>

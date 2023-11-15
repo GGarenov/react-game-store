@@ -5,7 +5,17 @@ import AnimatedPage from "../../Containers/AnimatedPage/AnimatedPage";
 import { v4 as uuidv4 } from "uuid";
 
 const Grid = (props) => {
-  const { shownGames, reviewDisplay, handleLike, handleHoverGame, handleAddToCart, grid } = props;
+  const {
+    shownGames,
+    reviewDisplay,
+    handleLike,
+    handleHoverGame,
+    handleAddToCart,
+    grid,
+    search,
+    searching,
+    handleSelectGame,
+  } = props;
 
   useEffect(() => {
     if (grid === false) {
@@ -28,17 +38,33 @@ const Grid = (props) => {
         <h3>You can add some, soon.</h3>
       </div>
       <div className={styles.gridContainer} style={{ display: reviewDisplay ? "none" : "grid" }} id="gridContainer">
-        {shownGames.map((game, i) => {
-          return (
-            <Card
-              game={game}
-              key={game.name}
-              handleLike={handleLike}
-              handleHoverGame={handleHoverGame}
-              handleAddToCart={handleAddToCart}
-            />
-          );
-        })}
+        {searching === false
+          ? shownGames.map((game, i) => {
+              return (
+                <Card
+                  game={game}
+                  key={game.name}
+                  handleLike={handleLike}
+                  handleHoverGame={handleHoverGame}
+                  handleAddToCart={handleAddToCart}
+                  handleSelectGame={handleSelectGame}
+                />
+              );
+            })
+          : shownGames.map((game, i) => {
+              if (game.name.toLowerCase().includes(search.toLowerCase())) {
+                return (
+                  <Card
+                    game={game}
+                    key={game.name}
+                    handleLike={handleLike}
+                    handleHoverGame={handleHoverGame}
+                    handleAddToCart={handleAddToCart}
+                    handleSelectGame={handleSelectGame}
+                  />
+                );
+              }
+            })}
       </div>
     </>
   );

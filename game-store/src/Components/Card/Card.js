@@ -8,7 +8,7 @@ import AddedToCart from "../AddedToCart/AddedToCart";
 import AnimatedCard from "../../Containers/AnimatedPage/AnimatedCard";
 
 const Card = (props) => {
-  const { game, handleSelectGame, handleAddToCart, handleHover, handleLike, handleHoverGame } = props;
+  const { game, handleAddToCart, handleHover, handleLike, handleHoverGame, handleSelectGame } = props;
 
   const variants = {
     initial: { opacity: 0 },
@@ -19,13 +19,15 @@ const Card = (props) => {
   return (
     <motion.div
       className={styles.card}
+      onClick={handleSelectGame}
+      id={game.id}
       style={{ margin: 0, padding: 0 }}
       variants={variants}
       initial="initial"
       animate="animate"
       exit="exit"
     >
-      <img src={require(`../../Resources/image/gameFootage/${game.surname}.jpg`)} />
+      <img src={require(`../../Resources/image/gameFootage/${game.surname}.jpg`)} className={styles.img} />
 
       <div className={styles.price}>
         {game.inCart ? (
